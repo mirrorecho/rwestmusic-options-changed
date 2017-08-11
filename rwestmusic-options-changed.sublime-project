@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/calliope"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-copper"
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/sandbox"
+		}
+	],
+	"virtualenv": "/Users/randallwest/Code/venvs/calliope-2.3"
+}
