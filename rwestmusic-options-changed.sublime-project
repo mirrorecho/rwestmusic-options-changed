@@ -12,6 +12,9 @@
 		},
 		{
 			"path": "/Users/randallwest/Code/mirrorecho/sandbox"
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-tokei"
 		}
 	],
 	"virtualenv": "/Users/randallwest/Code/venvs/calliope-2.3"

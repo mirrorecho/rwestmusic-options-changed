@@ -1,5 +1,5 @@
 import abjad
-from calliope import tools, bubbles, machines
+import calliope
 
 class CloselyEventMixin(object):
     displace_fifths = 0
@@ -13,29 +13,29 @@ class CloselyEventMixin(object):
             self.pitch = abjad.NamedPitch(self.pitch).transpose(self.displace_octaves * 12)
 
     def get_pitch_number(self):
-        # TO DO... this should be implemented in some more consistent way on the base machines.Event
+        # TO DO... this should be implemented in some more consistent way on the base calliope.Event
         return abjad.NamedPitch(self.pitch).number
 
-class Event1(CloselyEventMixin, machines.Event):
+class Event1(CloselyEventMixin, calliope.Event):
     pitch = "D4"
     set_beats = 1
 
-class Event2(CloselyEventMixin, machines.Event):
+class Event2(CloselyEventMixin, calliope.Event):
     pitch = "F4"
     set_beats = 0.5
 
-class Event3(CloselyEventMixin, machines.Event):
+class Event3(CloselyEventMixin, calliope.Event):
     pitch = "E4"
     set_beats = 0.5
 
-class Event4(CloselyEventMixin, machines.Event):
+class Event4(CloselyEventMixin, calliope.Event):
     pitch = "G4"
     set_beats = 1
 
-class Event5(CloselyEventMixin, machines.Event):
+class Event5(CloselyEventMixin, calliope.Event):
     pitch = "Ab4"
     set_beats = 1
 
 # ==============================
 
-tools.illustrate_me()
+calliope.illustrate_me()

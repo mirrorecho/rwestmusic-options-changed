@@ -1,14 +1,14 @@
 import abjad
 from calliope import tools, bubbles, machines
 
-class ClusterNode(bubbles.Bubble):
+class ClusterNode(calliope.Bubble):
     leaf_string="c'4"
     def __init__(self, leaf_string=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if leaf_string:
             self.leaf_string = leaf_string
 
-class Cluster(bubbles.Bubble):
+class Cluster(calliope.Bubble):
     container_type = abjad.Cluster
     is_simultaneous = False
     sub_types = (ClusterNode, )
@@ -25,7 +25,7 @@ class Cluster1(Cluster):
     middle = ClusterNode("<g' d''>4")
     end = ClusterNode("<a' b'>4")
 
-class Clusters(bubbles.Bubble):
+class Clusters(calliope.Bubble):
     cluster_types = ()
     is_simultaneous = False
     times =1
@@ -37,7 +37,7 @@ class Clusters(bubbles.Bubble):
         # print( self.cluster_types[0]().ly() )
         self.extend( [c()() for c in self.cluster_types] )
 
-class DemoBubble(machines.LineBlock):
+class DemoBubble(calliope.LineBlock):
     clusters_I = Clusters(
         Cluster1,
         Cluster1(middle=ClusterNode("c'''4")),
@@ -45,7 +45,7 @@ class DemoBubble(machines.LineBlock):
         )
 
 
-tools.illustrate_me( bubble=DemoBubble )
+calliope.illustrate_me( bubble=DemoBubble )
 
 
 # class ScoreDemo(bubbles.Score):
@@ -71,4 +71,4 @@ tools.illustrate_me( bubble=DemoBubble )
 
 # ==============================================
 
-# tools.illustrate_me(  )
+# calliope.illustrate_me(  )
