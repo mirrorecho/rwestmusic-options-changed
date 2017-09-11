@@ -12,14 +12,14 @@ from mark_h import score as score_h
 
 closely_score_music = calliope.MatchSequence(
     calliope.Bubble.from_module(score_0, name="score_0"),
-    calliope.Bubble.from_module(score_a, name="score_a"),
-    calliope.Bubble.from_module(score_b, name="score_b"),
-    calliope.Bubble.from_module(score_c, name="score_c"),
-    calliope.Bubble.from_module(score_d, name="score_d"),
-    calliope.Bubble.from_module(score_e, name="score_e"),
-    calliope.Bubble.from_module(score_f, name="score_f"),
-    calliope.Bubble.from_module(score_g, name="score_g"),
-    calliope.Bubble.from_module(score_h, name="score_h"),
+    # calliope.Bubble.from_module(score_a, name="score_a"),
+    # calliope.Bubble.from_module(score_b, name="score_b"),
+    # calliope.Bubble.from_module(score_c, name="score_c"),
+    # calliope.Bubble.from_module(score_d, name="score_d"),
+    # calliope.Bubble.from_module(score_e, name="score_e"),
+    # calliope.Bubble.from_module(score_f, name="score_f"),
+    # calliope.Bubble.from_module(score_g, name="score_g"),
+    # calliope.Bubble.from_module(score_h, name="score_h"),
 )
 
 calliope.illustrate_me(bubble=closely_score_music, score_type=CloselyScore)

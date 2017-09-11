@@ -1,7 +1,9 @@
-% 2017-09-10 17:09
+% 2017-09-11 01:43
 
 \version "2.19.54"
 \language "english"
+
+\include "../../stylesheets/score.ily"
 
 \header {}
 
@@ -11,13 +13,16 @@
 
 \score {
     \new Score <<
-        \context Staff = "Flute" {
+        \context Staff = "Flute" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Flute }
-            \set Staff.shortInstrumentName = \markup { Flute }
+            \set Staff.shortInstrumentName = \markup { Fl. }
             {
                 \accidentalStyle modern-cautionary
-                r1
-                r1
+                {
+                    R1 * 2
+                }
                 e''4 \pp
                 a''2
                 fs''4 ~
@@ -34,10 +39,9 @@
                 a''4
                 f''2
                 bf''4
-                r1
-                r1
-                r1
-                r1
+                {
+                    R1 * 4
+                }
                 fs''8 [
                 d''8 ]
                 f''4
@@ -90,13 +94,16 @@
                 cs'''8 ]
             }
         }
-        \context Staff = "Clarinet" {
-            \set Staff.instrumentName = \markup { Clarinet }
-            \set Staff.shortInstrumentName = \markup { Clarinet }
+        \context Staff = "Clarinet" \with {
+            \consists Horizontal_bracket_engraver
+        } {
+            \set Staff.instrumentName = \markup { "Clarinet in Bb" }
+            \set Staff.shortInstrumentName = \markup { Cl. }
             {
                 \accidentalStyle modern-cautionary
-                r1
-                r1
+                {
+                    R1 * 2
+                }
                 e'4 \pp
                 f'2
                 a4 ~
@@ -113,10 +120,9 @@
                 a4
                 bf'2
                 c''4
-                r1
-                r1
-                r1
-                r1
+                {
+                    R1 * 4
+                }
                 g8 [
                 e'8 ]
                 a4
@@ -169,13 +175,16 @@
                 f''8 ]
             }
         }
-        \context Staff = "Violin" {
+        \context Staff = "Violin" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Violin }
-            \set Staff.shortInstrumentName = \markup { Violin }
+            \set Staff.shortInstrumentName = \markup { Vln. }
             {
                 \accidentalStyle modern-cautionary
-                r1
-                r1
+                {
+                    R1 * 2
+                }
                 f'4 \pp ^ \markup { "sul. pont" }
                 b2
                 g'4 ~
@@ -192,10 +201,9 @@
                 e'4
                 g'2
                 c'4
-                r1
-                r1
-                r1
-                r1
+                {
+                    R1 * 4
+                }
                 d'8 [
                 e'8 ]
                 f'4
@@ -241,9 +249,12 @@
                 fs''8 ]
             }
         }
-        \context Staff = "Cello" {
+        \context Staff = "Cello" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Cello }
-            \set Staff.shortInstrumentName = \markup { Cello }
+            \set Staff.shortInstrumentName = \markup { Vc. }
+            \clef "bass"
             {
                 \accidentalStyle modern-cautionary
                 e4 \pp ^ \markup { "sul. pont" }

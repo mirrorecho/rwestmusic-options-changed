@@ -2,6 +2,7 @@ import abjad
 import calliope
 
 class CloselyScore(calliope.Score):
+    stylesheets=("../../stylesheets/score.ily",)
 
     class Flute(calliope.Staff):
         instrument=abjad.instrumenttools.Flute(

@@ -3,6 +3,11 @@ import calliope
 from closely.libraries.sequences import PhraseMaker, PitchSequence, PITCH_SEQUENCE
 from closely.libraries.rhythms import DRONE_RHYTHM_PATTERN, DRILL_RHYTHM_PATTERN
 
+# WARNING WARNING WARNING... THIS CREATES DUPE NAMED ITEMS IN MODULE BUBBLE TREE AND MESSES THING UP!!!!!!!!
+# from closely.score_staves import CloselyScore
+from closely import score_staves
+
+
 # -----------------------------------------------------------------
 # TO CONSIDER... MOVE ALL OF THIS TO C AND C TO D????????
 
@@ -32,6 +37,7 @@ class PitchedPhraseFast(DronePhrase):
 # PARTS:
 
 class Flute(calliope.Line): 
+
     phrase_0 = PitchedPhrase(
         pitch_sequence = pitch_sequence_a.select(0,2)(keep_in_range=(12, 29))
         )(6, 6, bookend_rests=(8,4))
@@ -80,15 +86,11 @@ class Cello(calliope.Line):
         3:"mp"
         })
 
-print(Cello().beats)
+# print(Cello().beats)
+
+# s = CloselyScore()
+# print(s[0].ly())
+
+calliope.illustrate_me(score_type=score_staves.CloselyScore)
 
 
-print(
-    PITCH_SEQUENCE(transpose=-3)[0:10]
-    )
-
-print(
-    PITCH_SEQUENCE.select(4, 5, 0, 1, -2, 4, transpose=-3)
-    )
-
-calliope.illustrate_me()
