@@ -2,14 +2,13 @@ import pandas as pd
 import abjad
 import calliope
 
-from closely.libraries.sequences import PITCH_CELL, PitchSequence, CellsPhraseMaker, TransformAddConstantPitch
+from closely.libraries.sequences import PITCH_SEQUENCE, PitchSequence, CellsPhraseMaker, TransformAddConstantPitch
 
 pitch_sequence_1 = PitchSequence()
 pitch_root_1 = "C3"
 
 class PhraseC1(CellsPhraseMaker):
-    pitches = pitch_sequence_1
-    cell_pitch_selections = (0,1,2,2,3)
+    pitches = PITCH_SEQUENCE.select(0,1,2,2,3)
 
 class BlockC1(calliope.LineStacked):
     child_types = (calliope.Line, calliope.Phrase, calliope.Cell)

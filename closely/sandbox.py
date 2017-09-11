@@ -1,10 +1,11 @@
+import abjad
+import calliope
 
+pitches = (1,2,3,4)
+rhythm = (1,-1, -1, 1,-2,2,-1,3,4,-4,2,-4,1)
 
-
-
-
-
-
+c = calliope.Cell(pitches=pitches, rhythm=rhythm, pitches_skip_rests=True)
+c.illustrate_me()
 
 # phrase_up_I.illustrate_me()
 

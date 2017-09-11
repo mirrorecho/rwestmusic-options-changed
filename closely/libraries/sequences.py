@@ -1,37 +1,47 @@
 import math
 import abjad
 import calliope
+from closely.libraries.rhythms import SymmetricalRhythmPattern
 
-# TO DO: this is really useful! ... move to calliope
+# TO DO: this is really useful! ... move to calliope!!!!
 class PitchSequence(calliope.CalliopeBaseMixin):
     # TO DO: implement as either numbers or abjad pitch objects
-    pitch_cell = ()
+    intervals = ()
     keep_in_range = None # set to tupe with start pitch, stop pitch
-    transpose = 0
+    transpose = 0 
+    base_sequence = None
+    base_selections = (0,1,)
 
-    def adjust_range(self, pitch):
+    def cyclic_at(self, attr_name, index):
+        my_tuple = getattr(self, attr_name)
+        loop_length = len(my_tuple) - 1
+        base_item = my_tuple[index % loop_length]
+        return base_item + (my_tuple[-1] - my_tuple[0]) * math.floor(index / loop_length) 
+
+    def pitch_at(self, index):
+        pitch = self.transpose
+        if self.base_sequence:
+            selected_index = self.cyclic_at("base_selections", index)
+            pitch += self.base_sequence[selected_index]
+        if self.intervals:
+            pitch += self.cyclic_at("intervals", index)
         if self.keep_in_range:
             pitch_range = abjad.PitchRange.from_pitches(*self.keep_in_range)
-            
             if pitch not in pitch_range:
                 voiced_pitches = pitch_range.voice_pitch_class(pitch)
                 if pitch < pitch_range.start_pitch.number:
                     pitch = voiced_pitches[0].number
                 else:
                     pitch = voiced_pitches[-1].number
-        
         return pitch
 
-    def __init__(self, *args, **kwargs):
-        if args:
-            self.pitch_cell = args
+    def __init__(self, *intervals, **kwargs):
+        self.intervals = intervals
         self.setup(**kwargs)
 
     def __getitem__(self, arg):
-        loop_length = len(self.pitch_cell) - 1
         if isinstance(arg, int):
-            basic_pitch = self.pitch_cell[arg % loop_length]
-            return basic_pitch + self.transpose + self.pitch_cell[-1] * math.floor(arg / loop_length) 
+            return self.pitch_at(arg)
         elif isinstance(arg, slice):
             start = arg.start or 0
             stop = arg.stop or 0
@@ -44,32 +54,50 @@ class PitchSequence(calliope.CalliopeBaseMixin):
         else:
             raise IndexError('invalid index type')
 
+    def __call__(self, *intervals, **kwargs):
+        return PitchSequence(base_sequence=self, *intervals, **kwargs)
+
+    def select(self, *selections, **kwargs):
+        return PitchSequence(base_sequence=self, base_selections=selections, **kwargs)
+
+
 PITCH_CELL = (0, 2, 3, 5)
 PITCH_SEQUENCE = PitchSequence(*PITCH_CELL)
+PITCH_SELECTIONS_G = (0,1,3,4,2,5)
 
-class CellsPhraseMaker(calliope.CalliopeBaseMixin):
-    pitches = (0,)
-    cell_pitch_selections = (0,)
+class PhraseMaker(calliope.CalliopeBaseMixin):
+    pitch_sequence = PitchSequence()
+    rhythm_pattern = SymmetricalRhythmPattern()
 
     def __init__(self, *args, **kwargs):
-        if args:
-            self.pitch_cell = args
         self.setup(**kwargs)
 
-    def __mul__(self, times):
-        return calliope.Phrase(
-                *[
-                    calliope.Cell(
-                        *[calliope.Event(
-                            pitch = self.pitches[s + self.cell_pitch_selections[-1] * t],
-                            beats = 1,
-                            )
-                            for s in self.cell_pitch_selections[:-1] 
-                        ]
-                    )
-                    for t in range(times)
-                ]
-            )
+    def __call__(self, *rhythm_lengths, pitch_sequence_index=0, **kwargs):
+        cells = []
+        for rl in rhythm_lengths:
+            rhythm = self.rhythm_pattern(rl)
+            pitches_length = len(list(filter(lambda x: x>0, rhythm)))
+            cells.append(calliope.Cell(
+                rhythm = rhythm,
+                pitches = self.pitch_sequence[pitch_sequence_index : pitch_sequence_index+pitches_length],
+                pitches_skip_rests = True
+            ))
+            pitch_sequence_index += pitches_length
+        return calliope.Phrase(*cells, **kwargs)
+
+# EXAMPLE:
+# pm = PhraseMaker(
+#     pitch_sequence = PITCH_SEQUENCE.select(*PITCH_SELECTIONS_G, 
+#         # keep_in_range=(0,11)
+#         ),
+#     rhythm_pattern = SymmetricalRhythmPattern(
+#         pattern = ( (-1,), (0.5,0.5,) )
+#         )
+#     )
+# p = pm(4,4,4,6)
+# p.illustrate_me()
+
+
 
 class TransformAddConstantPitch(calliope.Transform):
     pitch=0

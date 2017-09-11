@@ -2,10 +2,10 @@ import math
 import abjad
 import calliope
 
-class SymmetricalBeats(calliope.CalliopeBaseMixin):
+class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
     end_offset = 0
-    pattern = ( (1,), )
-    filler = ( (-1,), )
+    pattern = ()
+    filler = ( (1,), )
 
     def __init__(self, *args, **kwargs):
         super().__init__()
@@ -41,15 +41,21 @@ class SymmetricalBeats(calliope.CalliopeBaseMixin):
                 rest_beats += b
         if rest_beats < 0:
             return_list.append(rest_beats)
-        print(sum(rhythm))
-        return return_list
+        return tuple(return_list)
 
-
-
-s1 = SymmetricalBeats(
-    pattern=( (-1,), (0.5,-0.5,), (0.5,-0.5), (2,-2, -2,) ),
-    end_offset = 0
+DRONE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (1,), (2,), (3,) ),
+    filler=( (4,), ),
+    )
+DRILL_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (0.5,0.5,), (1,), (1,) ),
+    filler=( (-1,), ),
     )
 
-n = 8
-print( sum(s1(n)) )
+FLIT_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (0.25,0.25), (-0.5,), (0.25,0.25), ),
+    filler=( (-0.5,), ),
+    )
+
+# s = SymmetricalBeats()
+# print(s(6))
