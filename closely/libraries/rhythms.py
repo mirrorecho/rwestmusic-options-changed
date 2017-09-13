@@ -43,10 +43,16 @@ class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
             return_list.append(rest_beats)
         return tuple(return_list)
 
+SIMPLE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (0.5, 0.5,), ),
+    filler=( (1,), ),
+    )
+
 DRONE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (1,), (2,), (3,) ),
     filler=( (4,), ),
     )
+
 DRILL_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.5,0.5,), (1,), (1,) ),
     filler=( (-1,), ),
@@ -55,6 +61,21 @@ DRILL_RHYTHM_PATTERN = SymmetricalRhythmPattern(
 FLIT_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.25,0.25), (-0.5,), (0.25,0.25), ),
     filler=( (-0.5,), ),
+    )
+
+BUILD_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (0.5,0.5,), (0.5,0.5,),  ),
+    filler=( (1,), ),
+    )
+
+UPBEAT_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (-0.5, 0.5,), (0.5,-0.5,),  ),
+    filler=( (-0.5, 0.5,), ),
+    )
+
+UPBEAT_CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (1,), ),
+    filler=( (-0.5, 0.5,), ),
     )
 
 # s = SymmetricalBeats()
