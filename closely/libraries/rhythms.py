@@ -18,7 +18,7 @@ class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
         return self.filler
 
 
-    def __call__(self, length, *args, **kwargs):
+    def __call__(self, length, fill_rests=False, *args, **kwargs):
         pattern = self.get_pattern(*args, **kwargs)
         filler = self.get_filler(*args, **kwargs)
         start_length = math.floor(length/2) + self.end_offset
@@ -31,16 +31,22 @@ class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
         rhythm = [beats for beat in start + middle + end for beats in beat] 
         return_list = []
         rest_beats = 0
-        for b in rhythm:
+        for i, b in enumerate(rhythm):
             if b > 0:
                 if rest_beats < 0:
-                    return_list.append(rest_beats)
+                    if fill_rests and i > 0:
+                        return_list[-1] -= rest_beats
+                    else:
+                        return_list.append(rest_beats)
                 return_list.append(b)
                 rest_beats = 0
             else:
                 rest_beats += b
         if rest_beats < 0:
-            return_list.append(rest_beats)
+            if fill_rests and len(return_list) > 0:
+                return_list[-1] -= rest_beats
+            else:
+                return_list.append(rest_beats)
         return tuple(return_list)
 
 SIMPLE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
@@ -48,17 +54,17 @@ SIMPLE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (1,), ),
     )
 
-DRONE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
-    pattern=( (1,), (2,), (3,) ),
-    filler=( (4,), ),
-    )
-
-DRILL_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+SIMPLE_BROKEN_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.5,0.5,), (1,), (1,) ),
     filler=( (-1,), ),
     )
 
-FLIT_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+SLOW_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (1,), (2,), (3,) ),
+    filler=( (4,), ),
+    )
+
+FLUTTER_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.25,0.25), (-0.5,), (0.25,0.25), ),
     filler=( (-0.5,), ),
     )
@@ -68,8 +74,9 @@ BUILD_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (1,), ),
     )
 
-UPBEAT_RHYTHM_PATTERN = SymmetricalRhythmPattern(
-    pattern=( (-0.5, 0.5,), (0.5,-0.5,),  ),
+# MEANINGFUL?
+UPBEAT_SPACED_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (-0.5, 0.5,), (-1,), (0.5,-0.5,), (-1)  ),
     filler=( (-0.5, 0.5,), ),
     )
 
@@ -77,6 +84,9 @@ UPBEAT_CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (1,), ),
     filler=( (-0.5, 0.5,), ),
     )
+
+print(UPBEAT_CLOCK_RHYTHM_PATTERN(6))
+print(UPBEAT_CLOCK_RHYTHM_PATTERN(6, fill_rests=True))
 
 # s = SymmetricalBeats()
 # print(s(6))

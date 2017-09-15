@@ -12,6 +12,7 @@ class PitchSequence(calliope.CalliopeBaseMixin):
     base_sequence = None
     base_selections = (0,1,)
 
+
     def cyclic_at(self, attr_name, index):
         my_tuple = getattr(self, attr_name)
         loop_length = len(my_tuple) - 1
@@ -34,6 +35,7 @@ class PitchSequence(calliope.CalliopeBaseMixin):
                 else:
                     pitch = voiced_pitches[-1].number
         return pitch
+
 
     def __init__(self, *intervals, **kwargs):
         self.intervals = intervals
@@ -60,7 +62,6 @@ class PitchSequence(calliope.CalliopeBaseMixin):
     def select(self, *selections, **kwargs):
         return PitchSequence(base_sequence=self, base_selections=selections, **kwargs)
 
-
 PITCH_CELL = (0, 2, 3, 5)
 PITCH_SEQUENCE = PitchSequence(*PITCH_CELL)
 PITCH_SELECTIONS_G = (0,1,3,4,2,5)
@@ -72,14 +73,30 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
     def __init__(self, *args, **kwargs):
         self.setup(**kwargs)
 
-    def __call__(self, *rhythm_lengths, pitch_sequence_index=0, **kwargs):
+    # TO DO: possibly rethink / refactor ... DRY
+    def __call__(self, 
+            rhythm_lengths = (1,), 
+            pitch_sequence = None,
+            pitch_sequence_index=0, 
+            pitch_selections = None,
+            keep_in_range = None,
+            transpose=0,
+            fill_rests=False, 
+            **kwargs
+            ):
         cells = []
+        pitch_sequence = pitch_sequence or self.pitch_sequence
+        if pitch_selections:
+            pitch_sequence = pitch_sequence.select(*pitch_selections, keep_in_range=keep_in_range, transpose=transpose)
+        elif keep_in_range or transpose: 
+            pitch_sequence = pitch_sequence(keep_in_range=keep_in_range, transpose=transpose)
+        
         for rl in rhythm_lengths:
-            rhythm = self.rhythm_pattern(rl)
+            rhythm = self.rhythm_pattern(rl, fill_rests=fill_rests)
             pitches_length = len(list(filter(lambda x: x>0, rhythm)))
             cells.append(calliope.Cell(
                 rhythm = rhythm,
-                pitches = self.pitch_sequence[pitch_sequence_index : pitch_sequence_index+pitches_length],
+                pitches = pitch_sequence[pitch_sequence_index : pitch_sequence_index+pitches_length],
                 pitches_skip_rests = True
             ))
             pitch_sequence_index += pitches_length
