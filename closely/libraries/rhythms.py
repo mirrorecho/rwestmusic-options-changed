@@ -34,7 +34,7 @@ class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
         for i, b in enumerate(rhythm):
             if b > 0:
                 if rest_beats < 0:
-                    if fill_rests and i > 0:
+                    if fill_rests and len(return_list) > 0:
                         return_list[-1] -= rest_beats
                     else:
                         return_list.append(rest_beats)
@@ -76,7 +76,7 @@ BUILD_RHYTHM_PATTERN = SymmetricalRhythmPattern(
 
 # MEANINGFUL?
 UPBEAT_SPACED_RHYTHM_PATTERN = SymmetricalRhythmPattern(
-    pattern=( (-0.5, 0.5,), (-1,), (0.5,-0.5,), (-1)  ),
+    pattern=( (-0.5, 0.5,), (-1,), (0.5,-0.5,), (-1,)  ),
     filler=( (-0.5, 0.5,), ),
     )
 
@@ -85,8 +85,8 @@ UPBEAT_CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (-0.5, 0.5,), ),
     )
 
-print(UPBEAT_CLOCK_RHYTHM_PATTERN(6))
-print(UPBEAT_CLOCK_RHYTHM_PATTERN(6, fill_rests=True))
+# print(UPBEAT_CLOCK_RHYTHM_PATTERN(6))
+# print(UPBEAT_CLOCK_RHYTHM_PATTERN(6, fill_rests=True))
 
 # s = SymmetricalBeats()
 # print(s(6))

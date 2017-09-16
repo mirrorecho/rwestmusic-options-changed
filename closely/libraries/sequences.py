@@ -126,6 +126,6 @@ class TransformAddConstantPitch(calliope.Transform):
             for l in event:
                 l.pitch = None # just to be safe
 
-        print([e.pitch for e in new_child.events])
+        # print([e.pitch for e in new_child.events])
 
         bubble.append(new_child)
