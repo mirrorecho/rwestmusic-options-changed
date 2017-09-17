@@ -50,6 +50,6 @@ class MarkB(calliope.LineBlock):
 
 mark_b_bubble = MarkB()
 
-calliope.SmartRange(-24,-2).transform_nodes(mark_b_bubble["Cello"])
+# calliope.SmartRange(-24,-2).transform_nodes(mark_b_bubble["Cello"])
 
 calliope.illustrate_me(bubble=mark_b_bubble, score_type=score_staves.CloselyScore)

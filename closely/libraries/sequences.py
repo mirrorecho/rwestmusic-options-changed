@@ -124,7 +124,7 @@ class TransformAddConstantPitch(calliope.Transform):
         for event in new_child.events:
             event.pitch = self.pitch
             for l in event:
-                l.pitch = None # just to be safe
+                l.pitch = self.pitch
 
         # print([e.pitch for e in new_child.events])
 

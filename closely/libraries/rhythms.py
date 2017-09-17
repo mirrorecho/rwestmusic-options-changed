@@ -85,6 +85,11 @@ UPBEAT_CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (-0.5, 0.5,), ),
     )
 
+FAST_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (-0.5, 0.5,), ),
+    filler=( (0.5, 0.5,), ),
+    )
+
 # print(UPBEAT_CLOCK_RHYTHM_PATTERN(6))
 # print(UPBEAT_CLOCK_RHYTHM_PATTERN(6, fill_rests=True))
 
