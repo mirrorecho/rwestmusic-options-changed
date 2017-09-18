@@ -70,7 +70,7 @@ class Clarinet(calliope.Line):
         0:("pp",)
         })
     bracket_cells = calliope.BracketCells()
-    my_range = SmartRange(-3,24)
+    my_range = calliope.SmartRange(-3,24)
 # ___________________________________________________________
 class Violin(calliope.Line): 
     phrase_0 = slow_phrase_maker(
@@ -87,7 +87,7 @@ class Violin(calliope.Line):
         0:("pp", "sul. pont"),
         })
     bracket_cells = calliope.BracketCells()
-    my_range = SmartRange(-5,20)
+    my_range = calliope.SmartRange(-5,20)
 # ___________________________________________________________
 class Cello(calliope.Line): 
     phrase_0 = slow_drone_maker(

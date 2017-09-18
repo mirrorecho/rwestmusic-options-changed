@@ -74,10 +74,14 @@ BUILD_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (1,), ),
     )
 
-# MEANINGFUL?
 UPBEAT_SPACED_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (-0.5, 0.5,), (-1,), (0.5,-0.5,), (-1,)  ),
     filler=( (-0.5, 0.5,), ),
+    )
+
+CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (1,), (1,), ),
+    filler=( (0.5, 0.5,), ),
     )
 
 UPBEAT_CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(

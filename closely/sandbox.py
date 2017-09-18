@@ -1,31 +1,35 @@
 import abjad
 import calliope
 
-pitches = (1,2,3,4)
-rhythm = (1,-1, -1, 1,-2,2,-1,3,4,-4,2,-4,1)
-
-c = calliope.Cell(pitches=pitches, rhythm=rhythm, pitches_skip_rests=True)
-c.illustrate_me()
-
-# phrase_up_I.illustrate_me()
+from closely.libraries import (pitches, sequences, rhythms, 
+    tally_apps_lib, pitch_range_helpers, phrases)
 
 
+class RhythmLine(calliope.Line):
+    metrical_durations = ( (2,4),(2,4), ) * 6
 
 
-# PITCH_SEQUENCE_I = PitchSequence(*PITCH_CELL) * 5
-#
-# print(PITCH_SEQUENCE_I)
+class RhythmTest(calliope.LineBlock):
+    class Line1(RhythmLine):
+        phrase_i = sequences.PhraseMaker(
+            rhythm_pattern = rhythms.UPBEAT_CLOCK_RHYTHM_PATTERN
+            )(
+                rhythm_lengths = (4,3,4,6),
+                fill_rests=True,
+            )
 
-# class SequenceUp(caliope.Phrase):
-#     class CellA(calliope.Cell):
-#         class Event1(calliope.Event):
-#             pitch = 0
-#         class Event1(calliope.Event):
-#             pitch = 0
-#         class Event1(calliope.Event):
-#             pitch = 0
-#     class CellB(calliope.Cell):
-#     class CellC(calliope.Cell):
+    class Line2(RhythmLine):
+        phrase_i = sequences.PhraseMaker(
+            rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN
+            )(
+                rhythm_lengths = (4,3,4,6)
+            )
 
+r = RhythmTest()
 
-# calliope.illustrate_me( )
+print( 
+    len( [l for l in r["Line1"].logical_ties if not l.rest] ), 
+    len( [l for l in r["Line2"].logical_ties if not l.rest] ), 
+    )
+
+calliope.illustrate_me(bubble=RhythmTest)

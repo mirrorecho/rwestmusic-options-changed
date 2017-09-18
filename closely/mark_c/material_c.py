@@ -1,51 +1,45 @@
 import abjad
 import calliope
 
-from closely.libraries.sequences import PITCH_SEQUENCE, PitchSequence, PhraseMaker, TransformAddConstantPitch
-from closely.libraries.rhythms import UPBEAT_SPACED_RHYTHM_PATTERN, FAST_RHYTHM_PATTERN
-from closely.libraries.pitch_ranges import hill_ranges_maker
-from closely.libraries.tally_apps import LINE_TALLY_APPS
+from closely.libraries import (pitches, sequences, rhythms, 
+    tally_apps_lib, pitch_range_helpers)
 
-pitch_sequence_1 = PitchSequence()
-pitch_root_1 = "C3"
-
-
-# _____________________________________________________________________________________
-# _____________________________________________________________________________________
+# _______________________________________________________________________________
+# _______________________________________________________________________________
 # PHRASES:
 
-selections_c_up = (0,1,2,2,3)
-selections_c = selections_c_up + tuple(reversed(selections_c_up))
+PITCH_SELECT_C = pitches.with_reversed(pitches.PITCH_SELECT_STUTTER)
+PITCH_SELECT_DOWN_C = pitches.down(pitches.PITCH_SELECT_WAVER)
 
-selections_c_down = (0,-1,-3, -2)
-selections_c_down_more = (0,-1,)
-
-c_phrase_maker = PhraseMaker(
-    pitch_sequence = PITCH_SEQUENCE.select(*selections_c),
-    rhythm_pattern = UPBEAT_SPACED_RHYTHM_PATTERN,
+c_phrase_maker = sequences.PhraseMaker(
+    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_C),
+    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN,
     )
 
-c_fast_phrase_maker = PhraseMaker(
-    pitch_sequence = PITCH_SEQUENCE.select(*selections_c[:7]),
-    rhythm_pattern = FAST_RHYTHM_PATTERN,
+c_fast_phrase_maker = sequences.PhraseMaker(
+    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_C[:7]),
+    rhythm_pattern = rhythms.FAST_RHYTHM_PATTERN,
     )
 
-# _____________________________________________________________________________________
-# _____________________________________________________________________________________
+c_fast_down_phrase_maker = sequences.PhraseMaker(
+    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_DOWN_C),
+    rhythm_pattern = rhythms.FAST_RHYTHM_PATTERN,
+    )
+
+# _______________________________________________________________________________
+# _______________________________________________________________________________
 # LineBlocks:
 
 class BlockC(calliope.LineStacked):
     child_types = (calliope.Line, calliope.Phrase, calliope.Cell)
-    intervals = ( (0,5,10), (0,3,7), (0,5,10), (0,4,7), ) 
-    # TO DO: CONSIDER THESE INTERVALS:
-    # intervals = ( (0,5,10), (0,3,8), (0,4,7), (0,5,10), ) 
-    class AddConstantPitch(TransformAddConstantPitch):
+    intervals = pitches.CHORDS_ALT
+
+    class AddConstantPitch(sequences.TransformAddConstantPitch):
         pitch = 0
 
     class PitchesThroughGrid(calliope.PitchesThroughGrid):
-        tally_apps = LINE_TALLY_APPS
-        pitch_ranges = hill_ranges_maker(6)
-        version = 1
+        tally_apps = tally_apps_lib.LINE_TALLY_APPS
+        pitch_ranges = pitch_range_helpers.hill_ranges_maker(6)
 
     # transform_add_pitch = TransformAddConstantPitch(pitch=0)
     # transform_through_pitch_grid = calliope.PitchesThroughGrid(
@@ -70,16 +64,16 @@ class BlockC_II(BlockC_I):
         bookend_rests = (6,),
         fill_rests = True
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = -2
 
 class BlockC_III(BlockC_II):
-    intervals = ( (0,5,10), )
+    intervals = pitches.CHORDS_FOURTHS
     line_c = c_fast_phrase_maker(
         rhythm_lengths = (4,3),
         bookend_rests = (3,),
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = -2
 
 class BlockC_IV(BlockC_III):
@@ -89,63 +83,57 @@ class BlockC_IV(BlockC_III):
         pitch_sequence_index = 7,
         bookend_rests = (1,),
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 0
 
 class BlockC_V(BlockC_IV):
-    intervals = ( (0,5,10), (0,4,7), ) 
-    line_c = c_fast_phrase_maker(
+    intervals = pitches.CHORDS_ALT_MAJOR
+    line_c = c_fast_down_phrase_maker(
         rhythm_lengths = (3,2,2),
-        pitch_sequence = PITCH_SEQUENCE.select(*selections_c_down),
         bookend_rests = (3,),
         )
 
 class BlockC_VI(BlockC_V):
     # TO DO... the ONLY thing that's different here is the bookend rest
     # consider DRY
-    line_c = c_fast_phrase_maker(
+    line_c = c_fast_down_phrase_maker(
         rhythm_lengths = (3,2,2),
-        pitch_sequence = PITCH_SEQUENCE.select(*selections_c_down),
         bookend_rests = (1,),
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 2
 
 class BlockC_VII(BlockC):
-    # TO DO... the ONLY thing that's different here is the bookend rest
-    # consider DRY
-    intervals = ( (0,5,10), )
-    line_c = c_fast_phrase_maker(
+    intervals = pitches.CHORDS_FOURTHS
+    line_c = c_fast_down_phrase_maker(
         rhythm_lengths = (8,),
-        pitch_sequence = PITCH_SEQUENCE.select(*selections_c_down),
         bookend_rests = (1,),
         pitch_sequence_index = 1,
         transpose=12,
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 4
 
 class BlockC_VIII(BlockC_VII):
     line_c = c_fast_phrase_maker(
         rhythm_lengths = (10,),
-        pitch_sequence = PITCH_SEQUENCE.select(*selections_c_down_more),
+        pitch_sequence = pitches.PITCH_SEQUENCE_DOWN,
         pitch_sequence_index = -3,
         transpose=12,
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 6
 
 class BlockC_IX(BlockC):
-    intervals = ( (0,4,7), )
-    line_c = PhraseMaker()(
+    intervals = pitches.CHORDS_MAJOR
+    line_c = sequences.PhraseMaker()(
         rhythm_lengths = (9,),
-        pitch_sequence = PITCH_SEQUENCE.select(*selections_c_down_more),
+        pitch_sequence = pitches.PITCH_SEQUENCE_DOWN,
         pitch_sequence_index = 3,
         transpose=12,
         )
-    class AddConstantPitch(TransformAddConstantPitch):
+    class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = -1
-
 
 c_i = BlockC_I(name="c_i")
 c_ii = BlockC_II(name="c_ii")

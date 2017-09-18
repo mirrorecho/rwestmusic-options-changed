@@ -1,4 +1,4 @@
-% 2017-09-15 00:05
+% 2017-09-17 17:04
 
 \version "2.19.54"
 \language "english"
@@ -102,24 +102,24 @@
             \clef "bass"
             {
                 \accidentalStyle modern-cautionary
-                c8 [
-                f8 ]
-                ef4
-                d4
-                g8 [
-                d8 ]
-                g8 [
-                f8 ]
-                ef4
-                af4
-                ef8 [
-                af8 ]
-                g8 [
-                f8 ]
-                bf4
-                f4
-                bf8 [
-                af8 ]
+                c'8 [
+                f'8 ]
+                ef'4
+                d'4
+                g'8 [
+                d'8 ]
+                g'8 [
+                f'8 ]
+                ef'4
+                af'4
+                ef'8 [
+                af'8 ]
+                g'8 [
+                f'8 ]
+                bf'4
+                f'4
+                bf'8 [
+                af'8 ]
             }
         }
     >>
