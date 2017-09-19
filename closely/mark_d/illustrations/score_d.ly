@@ -1,4 +1,4 @@
-% 2017-09-17 21:27
+% 2017-09-19 01:20
 
 \version "2.19.54"
 \language "english"
@@ -21,25 +21,41 @@
             {
                 \accidentalStyle modern-cautionary
                 r8
-                df''4. \startGroup
-                ef''2 ~
-                ef''8
-                ff''4
-                cf''8 ~
-                cf''4
-                d''4 ~
-                d''4.
-                cf''8 \stopGroup
+                gf''4. \startGroup
+                cf'''2 ~
+                cf'''8
+                cf'''4
+                cf'''8 ~
+                cf'''4
+                bff''4 ~
+                bff''4.
+                g''8 \stopGroup
                 r8
-                cf''4. \startGroup
-                d''2 ~
-                d''4
-                cf''4 ~
-                cf''4.
-                gf''8 \stopGroup
+                cf'''4. \startGroup
+                c'''2 ~
+                c'''4
+                cf'''4 ~
+                cf'''4.
+                cf'''8 \stopGroup
+                cf''4 \startGroup
+                df''4
+                cf''8 [
+                ef''8 ]
+                af''4
+                gf''4 \stopGroup
+                gf''4 \startGroup
+                ff''4
+                ef''8 [
+                bff''8 ]
+                bff''8 [
+                cf'''8
+                c'''8
+                g''8 ]
+                cf''4
+                cf''4 \stopGroup
                 r2
                 {
-                    R1 * 25
+                    R1 * 22
                 }
             }
         }
@@ -51,25 +67,41 @@
             {
                 \accidentalStyle modern-cautionary
                 r8
-                gf'4. \startGroup
-                gf'2 ~
-                gf'8
+                cf''4. \startGroup
+                ef'2 ~
+                ef'8
                 gf'4
                 cf''8 ~
                 cf''4
-                bff'4 ~
-                bff'4.
-                g'8 \stopGroup
-                r8
-                cf''4. \startGroup
-                c''2 ~
-                c''4
                 cf''4 ~
                 cf''4.
-                df''8 \stopGroup
+                bff'8 \stopGroup
+                r8
+                gf'4. \startGroup
+                g'2 ~
+                g'4
+                g'4 ~
+                g'4.
+                gf'8 \stopGroup
+                bf'4 \startGroup
+                bf'4
+                bf'8 [
+                cf''8 ]
+                cf''4
+                df''4 \stopGroup
+                ef''4 \startGroup
+                gf'4
+                cf''8 [
+                cf''8 ]
+                cf''8 [
+                cf''8
+                cf''8
+                cf''8 ]
+                df''4
+                cf''4 \stopGroup
                 r2
                 {
-                    R1 * 25
+                    R1 * 22
                 }
             }
         }
@@ -81,25 +113,41 @@
             {
                 \accidentalStyle modern-cautionary
                 r8
-                cf'4. \startGroup
-                bf2 ~
-                bf8
-                cf'4
-                ef'8 ~
-                ef'4
+                df'4. \startGroup
+                gf'2 ~
+                gf'8
+                ff'4
+                af'8 ~
+                af'4
+                d'4 ~
+                d'4.
+                d'8 \stopGroup
+                r8
+                d'4. \startGroup
+                d'2 ~
+                d'4
                 cf'4 ~
                 cf'4.
-                bff8 \stopGroup
-                r8
-                gf'4. \startGroup
-                g'2 ~
-                g'4
-                ff'4 ~
-                ff'4.
-                cf''8 \stopGroup
+                cf'8 \stopGroup
+                f'4 \startGroup
+                gf'4
+                ef'8 [
+                gf'8 ]
+                gf'4
+                cf'4 \stopGroup
+                bf'4 \startGroup
+                cf'4
+                af8 [
+                ff'8 ]
+                d'8 [
+                d'8
+                g'8
+                cf'8 ]
+                gf'4
+                gf'4 \stopGroup
                 r2
                 {
-                    R1 * 25
+                    R1 * 22
                 }
             }
         }
@@ -112,25 +160,41 @@
             {
                 \accidentalStyle modern-cautionary
                 r8
-                cf4. \startGroup
-                cf'2 ~
-                cf'8
+                cf'4. \startGroup
+                bf2 ~
+                bf8
                 cf'4
-                af8 ~
-                af4
+                ef'8 ~
+                ef'4
                 ff'4 ~
                 ff'4.
-                d'8 \stopGroup
+                cf'8 \stopGroup
                 r8
-                d4. \startGroup
-                cf2 ~
+                cf'4. \startGroup
+                cf'2 ~
+                cf'4
+                ff'4 ~
+                ff'4.
+                df'8 \stopGroup
+                ef4 \startGroup
                 cf4
-                g4 ~
-                g4.
-                cf8 \stopGroup
+                af8 [
+                cf'8 ]
+                df'4
+                cf'4 \stopGroup
+                cf'4 \startGroup
+                cf4
+                cf8 [
+                d8 ]
+                g8 [
+                gf8
+                d8
+                ff8 ]
+                cf'4
+                ff'4 \stopGroup
                 r2
                 {
-                    R1 * 25
+                    R1 * 22
                 }
             }
         }

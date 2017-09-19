@@ -121,10 +121,8 @@ class TransformAddConstantPitch(calliope.Transform):
 
     def transform_nodes(self, bubble):
         new_child = bubble[0](name=str(bubble.name) + "constant_pitch_" + str(self.pitch))
-        for event in new_child.events:
+        for event in new_child.non_rest_events:
             event.pitch = self.pitch
-            for l in event:
-                l.pitch = self.pitch
 
         # print([e.pitch for e in new_child.events])
 

@@ -150,6 +150,6 @@ c_sequence = (c_i, c_ii, c_iii, c_iv, c_v, c_vi, c_vii, c_viii, c_ix, c_x)
 
 # c_i.transform_through_pitch_grid.grid.illustrate_start()
 # c_i.transform_through_pitch_grid.grid.illustrate_me()
-# c_ix.illustrate_me()
+# c_i.illustrate_me()
 
 

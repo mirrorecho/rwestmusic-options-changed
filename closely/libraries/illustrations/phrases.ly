@@ -1,4 +1,4 @@
-% 2017-09-17 20:17
+% 2017-09-18 20:40
 
 \version "2.19.54"
 \language "english"
@@ -17,22 +17,22 @@
             \set Staff.instrumentName = \markup { Star_line_0 }
             \set Staff.shortInstrumentName = \markup { Star_line_0 }
             {
-                r8
-                c'4.
-                d'2 ~
-                d'8
-                f'4
-                g'4.
-                ef'4 ~
-                ef'4.
-                af'8 [
-                r8 ]
-                bf'4.
-                cs''2.
-                ef''4 ~
-                ef''4.
-                c''8 [
-                r2 ]
+                bf'4
+                c''4
+                bf'8 [
+                d''8 ]
+                g''4
+                f''4
+                f''4
+                ef''4
+                d''8 [
+                af''8 ]
+                af''8 [
+                bf''8
+                b''8
+                fs''8 ]
+                bf'4
+                bf'4
             }
         }
         \context Staff = "star_line_1" \with {
@@ -41,22 +41,22 @@
             \set Staff.instrumentName = \markup { Star_line_1 }
             \set Staff.shortInstrumentName = \markup { Star_line_1 }
             {
-                r8
-                f'4.
-                f'2 ~
-                f'8
+                a'4
+                a'4
+                a'8 [
+                bf'8 ]
                 bf'4
-                bf'4.
-                af'4 ~
-                af'4.
-                cs''8 [
-                r8 ]
-                cs''4.
-                fs''2.
-                fs''4 ~
-                fs''4.
-                f''8 [
-                r2 ]
+                c''4
+                d''4
+                f'4
+                bf'8 [
+                bf'8 ]
+                bf'8 [
+                bf'8
+                bf'8
+                bf'8 ]
+                c''4
+                bf'4
             }
         }
         \context Staff = "star_line_2" \with {
@@ -65,46 +65,46 @@
             \set Staff.instrumentName = \markup { Star_line_2 }
             \set Staff.shortInstrumentName = \markup { Star_line_2 }
             {
-                r8
-                bf'4.
-                a'2 ~
-                a'8
-                ef''4
-                d''4.
-                cs''4 ~
-                cs''4.
-                fs''8 [
-                r8 ]
-                f''4.
-                b''2.
-                bf''4 ~
-                bf''4.
-                bf''8 [
-                r2 ]
+                e'4
+                f'4
+                d'8 [
+                f'8 ]
+                f'4
+                bf4
+                a'4
+                bf4
+                g8 [
+                ef'8 ]
+                cs'8 [
+                cs'8
+                fs'8
+                bf8 ]
+                f'4
+                f'4
             }
         }
-        \context Staff = "star_i_aconstant_pitch_-2" \with {
+        \context Staff = "star_ii_aconstant_pitch_-2" \with {
             \consists Horizontal_bracket_engraver
         } {
-            \set Staff.instrumentName = \markup { Star_i_aconstant_pitch_-2 }
-            \set Staff.shortInstrumentName = \markup { Star_i_aconstant_pitch_-2 }
+            \set Staff.instrumentName = \markup { Star_ii_aconstant_pitch_-2 }
+            \set Staff.shortInstrumentName = \markup { Star_ii_aconstant_pitch_-2 }
             {
-                r8
-                bf4.
-                bf2 ~
-                bf8
+                d4
+                bf,4
+                g8 [
+                bf8 ]
+                c'4
                 bf4
-                bf4.
-                bf4 ~
-                bf4.
-                bf8 [
-                r8 ]
-                bf4.
-                bf2.
-                bf4 ~
-                bf4.
-                bf8 [
-                r2 ]
+                bf4
+                bf,4
+                bf,8 [
+                cs8 ]
+                fs8 [
+                f8
+                cs8
+                ef8 ]
+                bf4
+                ef'4
             }
         }
     >>

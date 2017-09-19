@@ -1,4 +1,4 @@
-% 2017-09-17 21:56
+% 2017-09-19 01:44
 
 \version "2.19.54"
 \language "english"
@@ -18,28 +18,23 @@
             \set Staff.shortInstrumentName = \markup { Line1 }
             {
                 \accidentalStyle modern-cautionary
-                c'4.
-                c'8 ~
-                c'8 [
-                c'8 ]
-                c'4
-                c'4.
-                c'8
-                c'4
-                c'4 ~
-                c'8
-                c'4
-                c'8
-                c'4
-                c'4 ~
+                r8
+                c'4. \startGroup
+                c'2 ~
                 c'8
                 c'4
                 c'8 ~
-                c'8
                 c'4
-                c'8
+                c'4 ~
+                c'4.
+                c'8 \stopGroup
+                r8
+                c'4. \startGroup
+                c'2 ~
                 c'4
-                r4
+                c'4 ~
+                c'4.
+                c'8 \stopGroup
                 r2
                 {
                     R1 * 1
@@ -53,32 +48,28 @@
             \set Staff.shortInstrumentName = \markup { Line2 }
             {
                 \accidentalStyle modern-cautionary
-                c'8 [
+                r2
+                c'8 \startGroup [
                 c'8 ]
                 c'4
                 c'4
                 c'8 [
-                c'8 ]
-                c'8 [
-                c'8 ]
-                c'4
-                c'8 [
-                c'8
-                c'8
+                c'8 \stopGroup ]
+                c'8 \startGroup [
                 c'8 ]
                 c'4
                 c'4
                 c'8 [
-                c'8
-                c'8
+                c'8 \stopGroup ]
+                r2
+                c'8 \startGroup [
                 c'8 ]
                 c'4
                 c'4
                 c'4
                 c'4
                 c'8 [
-                c'8
-                r4 ]
+                c'8 \stopGroup ]
                 r2
                 {
                     R1 * 1
