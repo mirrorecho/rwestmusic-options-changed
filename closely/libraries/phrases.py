@@ -20,6 +20,49 @@ star_phrase_maker_iii = sequences.PhraseMaker(
     )
 # _______________________________________________________________________________
 
+class SubRhythmFuse(calliope.Transform):
+    # TO DO... this could more elegant... rethink fusing
+    def transform_nodes(self, machine):
+        for c in machine.cells:
+            c[0].fuse(1)
+            c[2].fuse(1)
+            c[4].fuse(1)
+        machine.events[-2].fuse(1)
+        for c in machine.cells:
+            c.remove_empty()
+        machine.cells[1].append(calliope.RestEvent(2))
+
+class StarRhythmLineBlock(calliope.LineBlock):
+    class Line_I(calliope.Line):
+        star_rhythm_phrase = sequences.PhraseMaker(
+                rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
+                )(
+                    rhythm_lengths = (10,8),
+                    fill_rests=True,
+                )
+
+    class Line_II(calliope.Line):
+        sub_rhythm_phrase = sequences.PhraseMaker(
+                rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN,
+                )(
+                    rhythm_lengths = (4,4,6), 
+                    bookend_rests = (2,),
+                    # fuse_me = SubRhythmFuse()# NOTE: THIS DOESN'T WORK!
+                )
+        fuse_me = SubRhythmFuse()
+
+# class MyLineblock(calliope.LineBlock):
+#     class LineA(calliope.Line):
+#         phrase_i = sub_rhythm_phrase
+        
+#     brackets = calliope.BracketByType(by_type=calliope.Event)
+
+# l = MyLineblock()
+# # calliope.BracketByType(by_type=calliope.Cell).transform_nodes(l)
+# calliope.illustrate_me(bubble=l)
+
+# _______________________________________________________________________________
+
 class StarPhraseBlock(calliope.LineStacked):
     # TO DO: should not have to specify child_types here...
     child_types = (calliope.Line, calliope.Phrase, calliope.Cell)
@@ -70,5 +113,4 @@ star_ii_a_1 = StarPhraseBlock_II_Grid_A(name="star_ii_a")
 
 # ============================================================
 
-
-calliope.illustrate_me(bubble=star_ii_a_1)
+# calliope.illustrate_me(bubble=star_ii_a_1)

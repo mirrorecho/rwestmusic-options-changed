@@ -12,7 +12,10 @@ class MyTransform(calliope.Transform):
     def transform_nodes(self, machine):
         for c in machine.cells:
             c[0].fuse(1)
-            c[-2].fuse(1)
+            c[2].fuse(1)
+            c[4].fuse(1)
+        machine.events[-2].fuse(1)
+        machine.remove_empty()
         machine.cells[1].append(calliope.RestEvent(2))
 
 
@@ -41,7 +44,7 @@ class RhythmTest(calliope.LineBlock):
         #         print(machine)
         #         machine.cells[1].append(calliope.RestEvent(1))
 
-    brackets = calliope.BracketCells()
+    brackets = calliope.BracketByType(by_type=calliope.Event)
 
 r = RhythmTest()
 # r2 = RhythmTest()

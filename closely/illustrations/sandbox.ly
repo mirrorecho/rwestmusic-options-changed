@@ -1,4 +1,4 @@
-% 2017-09-19 01:44
+% 2017-09-19 23:39
 
 \version "2.19.54"
 \language "english"
@@ -19,7 +19,7 @@
             {
                 \accidentalStyle modern-cautionary
                 r8
-                c'4. \startGroup
+                c'4.
                 c'2 ~
                 c'8
                 c'4
@@ -27,14 +27,14 @@
                 c'4
                 c'4 ~
                 c'4.
-                c'8 \stopGroup
+                c'8
                 r8
-                c'4. \startGroup
+                c'4.
                 c'2 ~
                 c'4
                 c'4 ~
                 c'4.
-                c'8 \stopGroup
+                c'8
                 r2
                 {
                     R1 * 1
@@ -50,25 +50,25 @@
                 \accidentalStyle modern-cautionary
                 r2
                 c'8 \startGroup [
-                c'8 ]
-                c'4
-                c'4
-                c'8 [
+                c'8 \stopGroup ]
+                c'4 \startGroup
+                c'4 \stopGroup
+                c'8 \startGroup [
                 c'8 \stopGroup ]
                 c'8 \startGroup [
-                c'8 ]
-                c'4
-                c'4
-                c'8 [
+                c'8 \stopGroup ]
+                c'4 \startGroup
+                c'4 \stopGroup
+                c'8 \startGroup [
                 c'8 \stopGroup ]
                 r2
                 c'8 \startGroup [
-                c'8 ]
-                c'4
-                c'4
-                c'4
-                c'4
-                c'8 [
+                c'8 \stopGroup ]
+                c'4 \startGroup
+                c'4 \stopGroup
+                c'4 \startGroup
+                c'4 \stopGroup
+                c'8 \startGroup [
                 c'8 \stopGroup ]
                 r2
                 {
