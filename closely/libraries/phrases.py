@@ -20,36 +20,51 @@ star_phrase_maker_iii = sequences.PhraseMaker(
     )
 # _______________________________________________________________________________
 
-class SubRhythmFuse(calliope.Transform):
-    # TO DO... this could more elegant... rethink fusing
-    def transform_nodes(self, machine):
-        for c in machine.cells:
-            c[0].fuse(1)
-            c[2].fuse(1)
-            c[4].fuse(1)
-        machine.events[-2].fuse(1)
-        for c in machine.cells:
-            c.remove_empty()
-        machine.cells[1].append(calliope.RestEvent(2))
 
-class StarRhythmLineBlock(calliope.LineBlock):
-    class Line_I(calliope.Line):
-        star_rhythm_phrase = sequences.PhraseMaker(
-                rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
-                )(
-                    rhythm_lengths = (10,8),
-                    fill_rests=True,
-                )
 
-    class Line_II(calliope.Line):
-        sub_rhythm_phrase = sequences.PhraseMaker(
-                rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN,
-                )(
-                    rhythm_lengths = (4,4,6), 
-                    bookend_rests = (2,),
-                    # fuse_me = SubRhythmFuse()# NOTE: THIS DOESN'T WORK!
-                )
-        fuse_me = SubRhythmFuse()
+# class StarRhythmLineBlock(calliope.LineBlock):
+#     class Line_I(calliope.Line):
+#         star_rhythm_phrase = sequences.PhraseMaker(
+#                 rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
+#                 )(
+#                     rhythm_lengths = (10,8),
+#                     fill_rests=True,
+#                 )
+
+#     class Line_II(calliope.Line):
+#         sub_rhythm_phrase = sequences.PhraseMaker(
+#                 rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN,
+#                 )(
+#                     rhythm_lengths = (4,4,6), 
+#                     bookend_rests = (2,),
+#                     # fuse_me = SubRhythmFuse()# NOTE: THIS DOESN'T WORK!
+#                 )
+#         fuse_me = SubRhythmFuse()
+
+class StarRhythmPhrase(sequences.PhraseFactory):
+    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
+    rhythm_lengths = (10,8)
+    fill_rests=True
+
+class SubRhythmPhrase(sequences.PhraseFactory):
+    rhythm_lengths = (4,4,6)
+    bookend_rests = (2,)
+    rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN
+    
+    class SubRhythmMod(calliope.Transform):
+        # TO DO... this could more elegant... rethink fusing
+        def transform_nodes(self, machine):
+            for c in machine.cells:
+                c[0].fuse(1)
+                c[2].fuse(1)
+                c[4].fuse(1)
+            machine.events[-2].fuse(1)
+            for c in machine.cells:
+                c.remove_empty()
+            machine.cells[1].append(calliope.RestEvent(2))
+
+
+
 
 # class MyLineblock(calliope.LineBlock):
 #     class LineA(calliope.Line):

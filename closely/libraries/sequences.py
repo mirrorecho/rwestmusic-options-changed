@@ -1,7 +1,8 @@
 import math
 import abjad
 import calliope
-from closely.libraries.rhythms import SymmetricalRhythmPattern
+
+from closely.libraries import rhythms, pitches, sequences
 
 # TO DO: this is really useful! ... move to calliope!!!!
 class PitchSequence(calliope.CalliopeBaseMixin):
@@ -66,9 +67,11 @@ PITCH_CELL = (0, 2, 3, 5)
 PITCH_SEQUENCE = PitchSequence(*PITCH_CELL)
 PITCH_SELECTIONS_G = (0,1,3,4,2,5)
 
+# TO DO !!!!!!!!!!!!!!!!!!!!!!!!! 
+# THIS SHOULD BE DEPRECIATED IN FAVOR OF PhraseFactory BELOW!!!!!!!!!!!!!!!
 class PhraseMaker(calliope.CalliopeBaseMixin):
     pitch_sequence = PitchSequence()
-    rhythm_pattern = SymmetricalRhythmPattern()
+    rhythm_pattern = rhythms.SymmetricalRhythmPattern()
 
     def __init__(self, *args, **kwargs):
         self.setup(**kwargs)
@@ -82,6 +85,7 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
             transpose=0,
             fill_rests=False, 
             ):
+        self.warn("PhraseMaker SHOULD BE DEPRECIATED")
         cells = []
         pitch_sequence = pitch_sequence or self.pitch_sequence
         if pitch_selections:
@@ -119,7 +123,7 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
 
 class PhraseFactory(calliope.Phrase):
         rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN
-        pitch_sequence = pitches.PITCH_SEQUENCE
+        pitch_sequence = sequences.PITCH_SEQUENCE
         rhythm_lengths = (4,4)
         fill_rests = False
         rhythm_lengths = (1,) 

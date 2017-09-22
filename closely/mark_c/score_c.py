@@ -20,7 +20,7 @@ class MarkC(calliope.LineBlock):
     class Violin(LineC): pass
     class Cello(LineC): pass
 
-    # NOTE: a little funky.... but this works well!
+    # NOTE: a little funky.... but this might work well
     # for i, part_cls in enumerate([Flute, Clarinet, Violin, Cello]):
     #     for block in c_sequence:
     #         setattr(part_cls, "phrase_" + block.name, block[i])

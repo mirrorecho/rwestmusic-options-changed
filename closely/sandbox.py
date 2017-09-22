@@ -5,7 +5,7 @@ from closely.libraries import (pitches, sequences, rhythms,
     tally_apps_lib, pitch_range_helpers)
 
 
-class StarRhythmPhrase(PhraseFactory):
+class StarRhythmPhrase(sequences.PhraseFactory):
     rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
     rhythm_lengths = (10,8)
     fill_rests=True
@@ -66,9 +66,9 @@ StarRhythmPhrase().illustrate_me()
 # r["Line1"].rhythm = (1,) * len(r["Line1"].logical_ties)
 
 
-print( 
-    len( r["Line1"].non_rest_events ), 
-    len( r["Line2"].non_rest_events ), 
-    )
+# print( 
+#     len( r["Line1"].non_rest_events ), 
+#     len( r["Line2"].non_rest_events ), 
+#     )
 
-calliope.illustrate_me(bubble=r)
+# calliope.illustrate_me(bubble=r)

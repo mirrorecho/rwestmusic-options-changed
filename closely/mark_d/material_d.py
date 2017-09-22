@@ -10,17 +10,26 @@ calliope.Transpose(interval=1).transform_nodes(d_star_i)
 d_star_ii = phrases.star_ii_a_1(name="d_star_ii")
 calliope.Transpose(interval=1).transform_nodes(d_star_ii)
 
-# DAH CONFUSING!
 class DStarIII(calliope.LineBlock):
-    line_0 = phrases.StarRhythmLineBlock.Line_I()()
-    line_1 = phrases.StarRhythmLineBlock.Line_I()()
-    line_2 = phrases.StarRhythmLineBlock.Line_II()
-    line_3 = line_2()
+    class Line0(calliope.Line):
+        phrase_i = phrases.StarRhythmPhrase()
 
-d_star_iii = DStarIII()
+    class Line1(calliope.Line):
+        phrase_i = phrases.StarRhythmPhrase()
 
-d_sequence = (d_star_i, d_star_ii, d_star_iii)
+    class Line2(calliope.Line):
+        phrase_i = phrases.SubRhythmPhrase()
 
-calliope.illustrate_me(bubble = d_star_iii)
+    class Line3(calliope.Line):
+        phrase_i = phrases.SubRhythmPhrase()
 
+d_star_iii = DStarIII(name="d_star_iii")
+
+d_sequence = (
+    # d_star_i, 
+    # d_star_ii, 
+    d_star_iii,
+    )
+
+# calliope.illustrate_me(bubble = d_star_iii)
 # d_star_i.illustrate_me()
