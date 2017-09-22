@@ -1,6 +1,6 @@
-% 2017-09-20 00:11
+% 2017-09-21 20:29
 
-\version "2.19.54"
+\version "2.18.2"
 \language "english"
 
 \header {}
@@ -66,6 +66,38 @@
         } {
             \set Staff.instrumentName = \markup { Line_2 }
             \set Staff.shortInstrumentName = \markup { Line_2 }
+            {
+                \accidentalStyle modern-cautionary
+                r2 [
+                c'8
+                c'8 ]
+                c'4
+                c'4
+                c'8 [
+                c'8
+                c'8
+                c'8 ]
+                c'4
+                c'4
+                c'8 [
+                c'8
+                r2 ]
+                c'8 [
+                c'8 ]
+                c'4
+                c'4
+                c'4
+                c'4
+                c'8 [
+                c'8
+                r2 ]
+            }
+        }
+        \context Staff = "line_3" \with {
+            \consists Horizontal_bracket_engraver
+        } {
+            \set Staff.instrumentName = \markup { Line_3 }
+            \set Staff.shortInstrumentName = \markup { Line_3 }
             {
                 \accidentalStyle modern-cautionary
                 r2 [

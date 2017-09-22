@@ -14,8 +14,8 @@ calliope.Transpose(interval=1).transform_nodes(d_star_ii)
 class DStarIII(calliope.LineBlock):
     line_0 = phrases.StarRhythmLineBlock.Line_I()()
     line_1 = phrases.StarRhythmLineBlock.Line_I()()
-    line_2 = phrases.StarRhythmLineBlock.Line_II()()
-    line_3 = phrases.StarRhythmLineBlock.Line_II()()
+    line_2 = phrases.StarRhythmLineBlock.Line_II()
+    line_3 = line_2()
 
 d_star_iii = DStarIII()
 

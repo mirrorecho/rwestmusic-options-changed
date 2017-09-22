@@ -2,7 +2,7 @@
 	"folders":
 	[
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/calliope"
+			"path": "../../mirrorecho/calliope"
 		},
 		{
 			"path": "."
@@ -17,5 +17,5 @@
 			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-tokei"
 		}
 	],
-	"virtualenv": "/Users/randallwest/Code/venvs/calliope-2.3"
+	"virtualenv": "/Users/rwest/Code/venvs/calliope-2.3"
 }

@@ -73,8 +73,7 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
     def __init__(self, *args, **kwargs):
         self.setup(**kwargs)
 
-    # TO DO: possibly rethink / refactor ... DRY
-    def __call__(self, 
+    def get_phrase_cells(self, 
             rhythm_lengths = (1,), 
             pitch_sequence = None,
             pitch_sequence_index=0, 
@@ -82,7 +81,6 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
             keep_in_range = None,
             transpose=0,
             fill_rests=False, 
-            **kwargs
             ):
         cells = []
         pitch_sequence = pitch_sequence or self.pitch_sequence
@@ -100,7 +98,11 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
                 pitches_skip_rests = True
             ))
             pitch_sequence_index += pitches_length
-        return calliope.Phrase(*cells, **kwargs)
+        return cells
+
+    # TO DO: possibly rethink / refactor ... DRY
+    def __call__(self, **kwargs):
+        return calliope.Phrase(*self.get_phrase_cells(**kwargs), **kwargs)
 
 # EXAMPLE:
 # pm = PhraseMaker(
@@ -114,6 +116,35 @@ class PhraseMaker(calliope.CalliopeBaseMixin):
 # p = pm(4,4,4,6)
 # p.illustrate_me()
 
+
+class PhraseFactory(calliope.Phrase):
+        rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN
+        pitch_sequence = pitches.PITCH_SEQUENCE
+        rhythm_lengths = (4,4)
+        fill_rests = False
+        rhythm_lengths = (1,) 
+        pitch_sequence_index=0 
+        pitch_selections = None
+        keep_in_range = None
+        transpose=0
+
+        def set_children_from_class(self, *args, **kwargs):
+            pitch_sequence = self.pitch_sequence
+            if self.pitch_selections:
+                pitch_sequence = pitch_sequence.select(*self.pitch_selections, keep_in_range=self.keep_in_range, transpose=self.transpose)
+            elif self.keep_in_range or self.transpose: 
+                pitch_sequence = pitch_sequence(keep_in_range=self.keep_in_range, transpose=self.transpose)
+            pitch_sequence_index = self.pitch_sequence_index
+            
+            for rl in self.rhythm_lengths:
+                rhythm = self.rhythm_pattern(rl, fill_rests=self.fill_rests)
+                pitches_length = len(list(filter(lambda x: x>0, rhythm)))
+                self.append(calliope.Cell(
+                    rhythm = rhythm,
+                    pitches = pitch_sequence[pitch_sequence_index : pitch_sequence_index+pitches_length],
+                    pitches_skip_rests = True
+                ))
+                pitch_sequence_index += pitches_length
 
 
 class TransformAddConstantPitch(calliope.Transform):
