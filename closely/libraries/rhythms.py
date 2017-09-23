@@ -49,6 +49,11 @@ class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
                 return_list.append(rest_beats)
         return tuple(return_list)
 
+STRAIGHT_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (1,), ),
+    filler=( (1,), ),
+    )
+
 SIMPLE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.5, 0.5,), ),
     filler=( (1,), ),

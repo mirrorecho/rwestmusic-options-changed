@@ -11,20 +11,16 @@ from closely.libraries import (pitches, sequences, rhythms,
 PITCH_SELECT_C = pitches.with_reversed(pitches.PITCH_SELECT_STUTTER)
 PITCH_SELECT_DOWN_C = pitches.down(pitches.PITCH_SELECT_WAVER)
 
-c_phrase_maker = sequences.PhraseMaker(
-    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_C),
-    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN,
-    )
+class CPhrase(sequences.PhraseFactory):
+    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_C)
+    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
 
-c_fast_phrase_maker = sequences.PhraseMaker(
-    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_C[:7]),
-    rhythm_pattern = rhythms.FAST_RHYTHM_PATTERN,
-    )
+class CPhraseFast(sequences.PhraseFactory):
+    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_C[:7])
+    rhythm_pattern = rhythms.FAST_RHYTHM_PATTERN
 
-c_fast_down_phrase_maker = sequences.PhraseMaker(
-    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_DOWN_C),
-    rhythm_pattern = rhythms.FAST_RHYTHM_PATTERN,
-    )
+class CPhraseFastDown(CPhraseFast):
+    pitch_sequence = pitches.PITCH_SEQUENCE.select(*PITCH_SELECT_DOWN_C)
 
 # _______________________________________________________________________________
 # _______________________________________________________________________________
@@ -41,97 +37,77 @@ class BlockC(calliope.LineStacked):
         tally_apps = tally_apps_lib.LINE_TALLY_APPS
         pitch_ranges = pitch_range_helpers.hill_ranges_maker(6)
 
-    # transform_add_pitch = TransformAddConstantPitch(pitch=0)
-    # transform_through_pitch_grid = calliope.PitchesThroughGrid(
-    #     *LINE_TALLY_APPS,
-    #     pitch_ranges = hill_ranges_maker(6),
-    #     version = 1, # TO DO: consider whether version should be included here
-    #     )
     def tally_pitches(self):
         self.pitch_grid.tally_loop()
         self.transforms_tree["PitchesThroughGrid"].transform_nodes(self)
 
-class BlockC_I(BlockC):
-    line_c = c_phrase_maker(
-        rhythm_lengths = (9,9),
-        bookend_rests = (4,),
-        fill_rests = True
-        )
+# TO DO... able to get rid of the nested clases below?
 
-class BlockC_II(BlockC_I):
-    line_c = c_phrase_maker(
-        rhythm_lengths = (13,),
-        bookend_rests = (6,),
+class BlockC_I(BlockC):
+    class MyPhrase(CPhrase):
+        rhythm_lengths = (9,9)
+        bookend_rests = (4,)
         fill_rests = True
-        )
+
+class BlockC_II(BlockC):
+    class MyPhrase(BlockC_I.MyPhrase):
+        rhythm_lengths = (13,)
+        bookend_rests = (6,)
     class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = -2
 
 class BlockC_III(BlockC_II):
     intervals = pitches.CHORDS_FOURTHS
-    line_c = c_fast_phrase_maker(
-        rhythm_lengths = (4,3),
-        bookend_rests = (3,),
-        )
-    class AddConstantPitch(BlockC.AddConstantPitch):
-        pitch = -2
+    class MyPhrase(CPhraseFast):
+        rhythm_lengths = (4,3)
+        bookend_rests = (3,)
 
-class BlockC_IV(BlockC_III):
+class BlockC_IV(BlockC):
     intervals = BlockC.intervals
-    line_c = c_fast_phrase_maker(
-        rhythm_lengths = (3,3,3),
-        pitch_sequence_index = 7,
-        bookend_rests = (1,),
-        )
-    class AddConstantPitch(BlockC.AddConstantPitch):
-        pitch = 0
+    class MyPhrase(CPhraseFast):
+        rhythm_lengths = (3,3,3)
+        pitch_sequence_index = 7
+        bookend_rests = (1,)
 
 class BlockC_V(BlockC_IV):
     intervals = pitches.CHORDS_ALT_MAJOR
-    line_c = c_fast_down_phrase_maker(
-        rhythm_lengths = (3,2,2),
-        bookend_rests = (3,),
-        )
+    class MyPhrase(CPhraseFastDown):
+        rhythm_lengths = (3,2,2)
+        bookend_rests = (3,)
 
 class BlockC_VI(BlockC_V):
-    # TO DO... the ONLY thing that's different here is the bookend rest
-    # consider DRY
-    line_c = c_fast_down_phrase_maker(
-        rhythm_lengths = (3,2,2),
-        bookend_rests = (1,),
-        )
+    class MyPhrase(BlockC_V.MyPhrase):
+        bookend_rests = (1,)
     class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 2
 
 class BlockC_VII(BlockC):
     intervals = pitches.CHORDS_FOURTHS
-    line_c = c_fast_down_phrase_maker(
-        rhythm_lengths = (8,),
-        bookend_rests = (1,),
-        pitch_sequence_index = 1,
-        transpose=12,
-        )
+    class MyPhrase(CPhraseFastDown):
+        rhythm_lengths = (8,)
+        bookend_rests = (1,)
+        pitch_sequence_index = 1
+        transpose=12
     class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 4
 
 class BlockC_VIII(BlockC_VII):
-    line_c = c_fast_phrase_maker(
-        rhythm_lengths = (10,),
-        pitch_sequence = pitches.PITCH_SEQUENCE_DOWN,
-        pitch_sequence_index = -3,
-        transpose=12,
-        )
+    class MyPhrase(CPhraseFast):
+        rhythm_lengths = (10,)
+        pitch_sequence = pitches.PITCH_SEQUENCE_DOWN
+        pitch_sequence_index = -3
+        transpose=12
     class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = 6
 
 class BlockC_IX(BlockC):
     intervals = pitches.CHORDS_MAJOR
-    line_c = sequences.PhraseMaker()(
-        rhythm_lengths = (9,),
-        pitch_sequence = pitches.PITCH_SEQUENCE_DOWN,
-        pitch_sequence_index = 3,
-        transpose=12,
-        )
+    class MyPhrase(sequences.PhraseFactory):
+        rhythm_lengths = (9,)
+        rhythm_pattern = rhythms.STRAIGHT_RHYTHM_PATTERN
+        pitch_sequence = pitches.PITCH_SEQUENCE_DOWN
+        pitch_sequence_index = 3
+        transpose=12
     class AddConstantPitch(BlockC.AddConstantPitch):
         pitch = -1
 
@@ -150,6 +126,6 @@ c_sequence = (c_i, c_ii, c_iii, c_iv, c_v, c_vi, c_vii, c_viii, c_ix, c_x)
 
 # c_i.transform_through_pitch_grid.grid.illustrate_start()
 # c_i.transform_through_pitch_grid.grid.illustrate_me()
-# c_i.illustrate_me()
+# c_vi.illustrate_me()
 
 

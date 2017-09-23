@@ -128,4 +128,6 @@ star_ii_a_1 = StarPhraseBlock_II_Grid_A(name="star_ii_a")
 
 # ============================================================
 
+# print(star_i_a_1[0].pitches)
+
 # calliope.illustrate_me(bubble=star_ii_a_1)

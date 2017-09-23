@@ -16,9 +16,9 @@ class LineD(calliope.Line):
 
 class MarkD(calliope.LineBlock):
     class Flute(LineD): pass
-    # class Clarinet(LineD): pass
-    # class Violin(LineD): pass
-    # class Cello(LineD): pass
+    class Clarinet(LineD): pass
+    class Violin(LineD): pass
+    class Cello(LineD): pass
 
 # _____________________________________________________________________________________
 
@@ -26,12 +26,11 @@ mark_d = MarkD()
 
 for i, part in enumerate(mark_d):
     for block in material_d.d_sequence:
-        part["phrase_%s_%s" % (block.name, i)] = block[i]
+        part["phrase_%s_%s" % (block.name, i)] = block[i]() # TO DO: this copy is screwy... maybe it can be removed eventually?
     calliope.BracketCells().transform_nodes(machine=part)
 
 # _____________________________________________________________________________________
 
+# calliope.illustrate_me(bubble=material_d.d_star_iii)
 
-calliope.illustrate_me(bubble=material_d.d_star_iii)
-
-# calliope.illustrate_me(bubble=mark_d, score_type=score_staves.CloselyScore)
+calliope.illustrate_me(bubble=mark_d, score_type=score_staves.CloselyScore)

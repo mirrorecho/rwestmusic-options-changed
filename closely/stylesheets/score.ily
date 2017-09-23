@@ -51,12 +51,14 @@
 
     }
     \context {
-        \Staff \RemoveEmptyStaves
+        \Staff 
+        % \RemoveEmptyStaves
         \override VerticalAxisGroup #'remove-first = ##t % NOTE: comment this out to show staves on first page
         \override Hairpin #'minimum-length = #6
     }
     \context {
-        \RhythmicStaff \RemoveEmptyStaves
+        \RhythmicStaff 
+        % \RemoveEmptyStaves
         \override VerticalAxisGroup #'remove-first = ##t % NOTE: comment this out to show staves on first page
         \override Hairpin #'minimum-length = #6
     }

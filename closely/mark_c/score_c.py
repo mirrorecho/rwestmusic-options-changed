@@ -31,7 +31,6 @@ mark_c = MarkC()
 
 for i, part in enumerate(mark_c):
     for block in c_sequence:
-        # print(block, i, len(block))
         part["phrase_" + block.name] = block[i]()
     calliope.BracketCells().transform_nodes(machine=part)
 
