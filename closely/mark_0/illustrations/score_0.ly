@@ -1,6 +1,6 @@
-% 2017-09-21 20:26
+% 2017-09-23 00:50
 
-\version "2.18.2"
+\version "2.19.54"
 \language "english"
 
 \include "../../stylesheets/score.ily"
@@ -187,28 +187,28 @@
                     R1 * 2
                 }
                 f'4 \pp \startGroup ^ \markup { "sul. pont" }
-                b2
-                g4 ~
-                g2
-                c'2 ~
-                c'4
-                a2
-                c'4 \stopGroup
-                f'4 \startGroup
-                d'2
-                g'4 \stopGroup
-                e'4 \startGroup
                 g'2
-                c''4 \stopGroup
+                a'4 ~
+                a'2
+                f'2 ~
+                f'4
+                g'2
+                g'4 \stopGroup
                 af'4 \startGroup
-                d'2
-                bf4 \stopGroup
+                bf'2
+                g'4 \stopGroup
+                af'4 \startGroup
+                af'2
+                bf'4 \stopGroup
+                c''4 \startGroup
+                af'2
+                bf'4 \stopGroup
                 {
                     R1 * 4
                 }
-                d'8 \startGroup [
-                e'8 ]
-                f'4
+                d''8 \startGroup [
+                e''8 ]
+                f''4
                 a'4
                 b'4
                 fs'4

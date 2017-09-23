@@ -150,6 +150,8 @@ class PhraseFactory(calliope.Phrase):
                 ))
                 pitch_sequence_index += pitches_length
 
+class DronePhraseFactory(PhraseFactory):
+    pitch_sequence = PitchSequence()
 
 class TransformAddConstantPitch(calliope.Transform):
     pitch=0

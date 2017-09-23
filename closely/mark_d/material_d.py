@@ -4,8 +4,12 @@ import calliope
 from closely.libraries import (pitches, sequences, rhythms, 
     tally_apps_lib, pitch_range_helpers, phrases)
 
-d_star_i = phrases.star_i_a_1(name="d_star_i")
-calliope.Transpose(interval=1).transform_nodes(d_star_i)
+class DStarI(phrases.StarPhraseBlock_I_Grid_A):
+    transpose_up = calliope.Transpose(interval=1)
+
+
+# d_star_i = phrases.star_i_a_1(name="d_star_i")
+# calliope.Transpose(interval=1).transform_nodes(d_star_i)
 
 d_star_ii = phrases.star_ii_a_1(name="d_star_ii")
 calliope.Transpose(interval=1).transform_nodes(d_star_ii)
@@ -22,6 +26,9 @@ class DStarIV(calliope.PhraseBlock):
     class PhraseViolin(phrases.SubRhythmPhrase): pass
     class PhraseCello(phrases.SubRhythmPhrase): pass
 
+
+d_star_i = DStarI(name="d_star_i")
+
 d_star_iii = DStarIII(name="d_star_iii")
 
 d_star_iv = DStarIV(name="d_star_iv")
@@ -37,4 +44,4 @@ d_sequence = (
     )
 
 # calliope.illustrate_me(bubble = d_star_iii)
-# d_star_i.illustrate_me()
+# d_star_iii.illustrate_me()

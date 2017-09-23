@@ -2,44 +2,20 @@ import abjad
 import calliope
 from closely.libraries import (pitches, sequences, rhythms, 
     tally_apps_lib, pitch_range_helpers)
-
-
-star_phrase_maker_i = sequences.PhraseMaker(
-    pitch_sequence = pitches.PITCH_SEQUENCE_STAR,
-    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN,
-    )
-
-star_phrase_maker_ii = sequences.PhraseMaker(
-    pitch_sequence = pitches.PITCH_SEQUENCE_STAR,
-    rhythm_pattern = rhythms.CLOCK_RHYTHM_PATTERN,
-    )
-
-star_phrase_maker_iii = sequences.PhraseMaker(
-    pitch_sequence = pitches.PITCH_SEQUENCE_STAR,
-    rhythm_pattern = rhythms.UPBEAT_CLOCK_RHYTHM_PATTERN,
-    )
 # _______________________________________________________________________________
 
+class StarPhrase(sequences.PhraseFactory):
+    pitch_sequence = pitches.PITCH_SEQUENCE_STAR
 
+class StarPhraseI(StarPhrase):
+    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
 
-# class StarRhythmLineBlock(calliope.LineBlock):
-#     class Line_I(calliope.Line):
-#         star_rhythm_phrase = sequences.PhraseMaker(
-#                 rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
-#                 )(
-#                     rhythm_lengths = (10,8),
-#                     fill_rests=True,
-#                 )
+class StarPhraseII(StarPhrase):
+    rhythm_pattern = rhythms.CLOCK_RHYTHM_PATTERN
 
-#     class Line_II(calliope.Line):
-#         sub_rhythm_phrase = sequences.PhraseMaker(
-#                 rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN,
-#                 )(
-#                     rhythm_lengths = (4,4,6), 
-#                     bookend_rests = (2,),
-#                     # fuse_me = SubRhythmFuse()# NOTE: THIS DOESN'T WORK!
-#                 )
-#         fuse_me = SubRhythmFuse()
+class StarPhraseIII(StarPhrase):
+    rhythm_pattern = rhythms.UPBEAT_CLOCK_RHYTHM_PATTERN
+# _______________________________________________________________________________
 
 class StarRhythmPhrase(sequences.PhraseFactory):
     rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
@@ -62,52 +38,37 @@ class SubRhythmPhrase(sequences.PhraseFactory):
             for c in machine.cells:
                 c.remove_empty()
             machine.cells[1].append(calliope.RestEvent(2))
-
-
-
-
-# class MyLineblock(calliope.LineBlock):
-#     class LineA(calliope.Line):
-#         phrase_i = sub_rhythm_phrase
-        
-#     brackets = calliope.BracketByType(by_type=calliope.Event)
-
-# l = MyLineblock()
-# # calliope.BracketByType(by_type=calliope.Cell).transform_nodes(l)
-# calliope.illustrate_me(bubble=l)
-
 # _______________________________________________________________________________
 
+# base block:
 class StarPhraseBlock(calliope.LineStacked):
     # TO DO: should not have to specify child_types here...
     child_types = (calliope.Line, calliope.Phrase, calliope.Cell)
     intervals = pitches.CHORDS_SEQUENCE_STAR
     class AddConstantPitch(sequences.TransformAddConstantPitch):
         pitch = -2
+# ____________________________
 
-class StarPhraseBlock_I(StarPhraseBlock):
-    star_line = star_phrase_maker_i(
-        rhythm_lengths = (10,8),
-        fill_rests = True,
-        )
+class StarPhraseBlockI(StarPhraseBlock):
+    class StarPhrase(StarPhraseI):
+        rhythm_lengths = (10,8)
+        fill_rests = True
 
-class StarPhraseBlock_II(StarPhraseBlock):
+class StarPhraseBlockII(StarPhraseBlock):
     # TO CONSIDER... always apply rotation to intervals equivalent to pitch_sequence_index??
     intervals = pitches.rotate(pitches.CHORDS_SEQUENCE_STAR, -5)
-    star_line = star_phrase_maker_ii(
-        rhythm_lengths = (5,7),
-        fill_rests = True,
-        pitch_sequence_index = -5,
-        )
+    class StarPhrase(StarPhraseII):
+        rhythm_lengths = (5,7)
+        fill_rests = True
+        pitch_sequence_index = -5
 
-class StarPhraseBlock_III(StarPhraseBlock):
+class StarPhraseBlockIII(StarPhraseBlock):
     intervals = pitches.rotate(pitches.CHORDS_SEQUENCE_STAR, 6)
-    star_line = star_phrase_maker_iii(
-        rhythm_lengths = (5,5),
+    class StarPhrase(StarPhraseIII):
+        rhythm_lengths = (5,5)
         fill_rests = True,
-        pitch_sequence_index = 6,
+        pitch_sequence_index = 6
         transpose=-12
-        )
 # _______________________________________________________________________________
 
 class StarGridMixin(StarPhraseBlock):
@@ -118,16 +79,17 @@ class StarGridMixin(StarPhraseBlock):
         self.pitch_grid.tally_loop()
         self.transforms_tree["PitchesThroughGrid"].transform_nodes(self)
 
-class StarPhraseBlock_I_Grid_A(StarPhraseBlock_I, StarGridMixin): pass
-class StarPhraseBlock_II_Grid_A(StarPhraseBlock_II, StarGridMixin): pass
-class StarPhraseBlock_III_Grid_A(StarPhraseBlock_II, StarGridMixin): pass
+class StarPhraseBlock_I_Grid_A(StarPhraseBlockI, StarGridMixin): pass
+class StarPhraseBlock_II_Grid_A(StarPhraseBlockII, StarGridMixin): pass
+class StarPhraseBlock_III_Grid_A(StarPhraseBlockIII, StarGridMixin): pass
 
 # TO DO: figure out versioning
 star_i_a_1 = StarPhraseBlock_I_Grid_A(name="star_i_a")
 star_ii_a_1 = StarPhraseBlock_II_Grid_A(name="star_ii_a")
+star_iii_a_1 = StarPhraseBlock_III_Grid_A(name="star_iii_a")
 
 # ============================================================
 
 # print(star_i_a_1[0].pitches)
 
-# calliope.illustrate_me(bubble=star_ii_a_1)
+# calliope.illustrate_me(bubble=star_iii_a_1)
