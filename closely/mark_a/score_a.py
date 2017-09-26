@@ -3,7 +3,7 @@ import calliope
 from closely.libraries.sequences import PhraseMaker, PitchSequence, PITCH_SEQUENCE
 from closely.libraries.rhythms import (
     DRONE_RHYTHM_PATTERN, DRILL_RHYTHM_PATTERN, FLIT_RHYTHM_PATTERN)
-from closely import score_staves
+from closely.scores import score_staves
 
 
 # -----------------------------------------------------------------

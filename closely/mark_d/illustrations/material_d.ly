@@ -1,4 +1,4 @@
-% 2017-09-21 23:50
+% 2017-09-23 14:27
 
 \version "2.19.54"
 \language "english"
@@ -11,117 +11,113 @@
 
 \score {
     \new Score <<
-        \context Staff = "Line0" \with {
+        \context Staff = "PhraseFlute" \with {
             \consists Horizontal_bracket_engraver
         } {
-            \set Staff.instrumentName = \markup { Line0 }
-            \set Staff.shortInstrumentName = \markup { Line0 }
+            \set Staff.instrumentName = \markup { PhraseFlute }
+            \set Staff.shortInstrumentName = \markup { PhraseFlute }
             {
-                \accidentalStyle modern-cautionary
                 r8
-                c'4.
-                d'2 ~
-                d'8
-                ef'4
-                f'4.
-                g'4 ~
-                g'4.
-                af'8 [
+                a''4.
+                g''2 ~
+                g''8
+                a''4
+                b''4.
+                a''4 ~
+                a''4.
+                b''8 [
                 r8 ]
-                bf'4.
-                c''2.
-                cs''4 ~
-                cs''4.
-                ef''8 [
+                c'''4.
+                b''2.
+                c'''4 ~
+                c'''4.
+                d'''8 [
                 r2 ]
             }
         }
-        \context Staff = "Line1" \with {
+        \context Staff = "PhraseClarinet" \with {
             \consists Horizontal_bracket_engraver
         } {
-            \set Staff.instrumentName = \markup { Line1 }
-            \set Staff.shortInstrumentName = \markup { Line1 }
+            \set Staff.instrumentName = \markup { PhraseClarinet }
+            \set Staff.shortInstrumentName = \markup { PhraseClarinet }
             {
-                \accidentalStyle modern-cautionary
                 r8
-                c'4.
-                d'2 ~
-                d'8
-                ef'4
-                f'4.
-                g'4 ~
                 g'4.
-                af'8 [
+                a'2 ~
+                a'8
+                b'4
+                a'4.
+                b'4 ~
+                b'4.
+                c''8 [
                 r8 ]
-                bf'4.
+                b'4.
                 c''2.
-                cs''4 ~
-                cs''4.
-                ef''8 [
+                d''4 ~
+                d''4.
+                c''8 [
                 r2 ]
             }
         }
-        \context Staff = "Line2" \with {
+        \context Staff = "PhraseViolin" \with {
             \consists Horizontal_bracket_engraver
         } {
-            \set Staff.instrumentName = \markup { Line2 }
-            \set Staff.shortInstrumentName = \markup { Line2 }
+            \set Staff.instrumentName = \markup { PhraseViolin }
+            \set Staff.shortInstrumentName = \markup { PhraseViolin }
             {
-                \accidentalStyle modern-cautionary
                 r2 [
-                c'8
-                c'8 ]
-                ef'4
-                ef'4
-                g'8 [
-                g'8
-                bf'8
-                bf'8 ]
-                cs''4
-                cs''4
-                f''8 [
-                f''8
+                b'8
+                b'8 ]
+                a'4
+                a'4
+                b'8 [
+                b'8
+                d''8
+                d''8 ]
+                c''4
+                c''4
+                d''8 [
+                d''8
                 r2 ]
-                af''8 [
-                af''8 ]
-                b''4
-                b''4
-                ef'''4
-                ef'''4
-                fs'''8 [
-                fs'''8
+                f''8 [
+                f''8 ]
+                e''4
+                e''4
+                f''4
+                f''4
+                a''8 [
+                a''8
                 r2 ]
             }
         }
-        \context Staff = "Line3" \with {
+        \context Staff = "PhraseCello" \with {
             \consists Horizontal_bracket_engraver
         } {
-            \set Staff.instrumentName = \markup { Line3 }
-            \set Staff.shortInstrumentName = \markup { Line3 }
+            \set Staff.instrumentName = \markup { PhraseCello }
+            \set Staff.shortInstrumentName = \markup { PhraseCello }
             {
-                \accidentalStyle modern-cautionary
                 r2 [
-                c'8
-                c'8 ]
-                ef'4
-                ef'4
-                g'8 [
-                g'8
-                bf'8
-                bf'8 ]
-                cs''4
-                cs''4
-                f''8 [
-                f''8
+                fs8
+                fs8 ]
+                a4
+                a4
+                g8 [
+                g8
+                a8
+                a8 ]
+                c'4
+                c'4
+                b8 [
+                b8
                 r2 ]
-                af''8 [
-                af''8 ]
-                b''4
-                b''4
-                ef'''4
-                ef'''4
-                fs'''8 [
-                fs'''8
+                c'8 [
+                c'8 ]
+                e'4
+                e'4
+                d'4
+                d'4
+                e'8 [
+                e'8
                 r2 ]
             }
         }

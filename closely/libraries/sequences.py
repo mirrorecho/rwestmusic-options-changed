@@ -132,12 +132,16 @@ class PhraseFactory(calliope.Phrase):
         keep_in_range = None
         transpose=0
 
-        def set_children_from_class(self, *args, **kwargs):
+        def get_pitch_sequence(self):
             pitch_sequence = self.pitch_sequence
             if self.pitch_selections:
                 pitch_sequence = pitch_sequence.select(*self.pitch_selections, keep_in_range=self.keep_in_range, transpose=self.transpose)
             elif self.keep_in_range or self.transpose: 
                 pitch_sequence = pitch_sequence(keep_in_range=self.keep_in_range, transpose=self.transpose)
+            return pitch_sequence
+
+        def set_children_from_class(self, *args, **kwargs):
+            pitch_sequence = self.get_pitch_sequence()
             pitch_sequence_index = self.pitch_sequence_index
             
             for rl in self.rhythm_lengths:
@@ -149,6 +153,12 @@ class PhraseFactory(calliope.Phrase):
                     pitches_skip_rests = True
                 ))
                 pitch_sequence_index += pitches_length
+
+        def reset_pitches(self):
+            pitch_sequence = self.get_pitch_sequence()
+            pitch_sequence_index = self.pitch_sequence_index
+            for i, e in enumerate(self.non_rest_events):
+                e.pitch = pitch_sequence[i + self.pitch_sequence_index]
 
 class DronePhraseFactory(PhraseFactory):
     pitch_sequence = PitchSequence()

@@ -5,7 +5,7 @@ from closely.libraries.rhythms import SLOW_RHYTHM_PATTERN, SIMPLE_BROKEN_RHYTHM_
 
 # WARNING WARNING WARNING... THIS CREATES DUPE NAMED ITEMS IN MODULE BUBBLE TREE AND MESSES THING UP!!!!!!!!
 # from closely.score_staves import CloselyScore
-from closely import score_staves
+from closely.scores import score_staves
 
 # _____________________________________________________________________________________
 # _____________________________________________________________________________________
@@ -48,7 +48,7 @@ class MarkB(calliope.LineBlock):
 # _____________________________________________________________________________________
 # _____________________________________________________________________________________
 
-mark_b_bubble = MarkB()
+mark_b_bubble = MarkB(name="mark_b")
 
 # calliope.SmartRange(-24,-2).transform_nodes(mark_b_bubble["Cello"])
 

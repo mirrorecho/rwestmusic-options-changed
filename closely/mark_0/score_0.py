@@ -5,7 +5,7 @@ from closely.libraries import (pitches, sequences, rhythms,
 
 # WARNING WARNING WARNING... THIS CREATES DUPE NAMED ITEMS IN MODULE BUBBLE TREE AND MESSES THING UP!!!!!!!!
 # from closely.score_staves import CloselyScore
-from closely import score_staves
+from closely.scores import score_staves
 
 
 # -----------------------------------------------------------------
@@ -110,6 +110,6 @@ class Cello(calliope.Line):
 # s = CloselyScore()
 # print(s[0].ly())
 
-calliope.illustrate_me(score_type=score_staves.CloselyScore)
+calliope.illustrate_me(score_type=score_staves.CloselyScore, as_midi=True)
 
 

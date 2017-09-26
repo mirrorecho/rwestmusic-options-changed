@@ -2,6 +2,25 @@ import abjad
 import calliope
 from closely.libraries import (pitches, sequences, rhythms, 
     tally_apps_lib, pitch_range_helpers)
+
+
+# TO DO... CONSIDER MOVING TO CALLIOPE
+class GridMask(object):
+    pitches_from_grid_bubble = None
+
+    class PitchesThroughGrid(calliope.Transform): pass
+
+    class PitchesFromGrid(calliope.Transform):
+        def transform_nodes(self, machine):
+            if machine.pitches_from_grid_bubble:
+                for line_index, l in enumerate(machine):
+                    for event_index, event in enumerate([e for e in l.non_rest_events]):
+                        # NOTE: grid will have numpy.int64 for each pitch, but machine expects int
+                        # ... change to use duck typing?
+                        event.pitch = int(machine.pitches_from_grid_bubble.pitch_grid.data.iat[line_index, event_index])
+
+
+
 # _______________________________________________________________________________
 
 class StarPhrase(sequences.PhraseFactory):
@@ -38,6 +57,7 @@ class SubRhythmPhrase(sequences.PhraseFactory):
             for c in machine.cells:
                 c.remove_empty()
             machine.cells[1].append(calliope.RestEvent(2))
+            machine.reset_pitches()
 # _______________________________________________________________________________
 
 # base block:
