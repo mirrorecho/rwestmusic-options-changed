@@ -5,13 +5,15 @@ from closely.libraries import (pitches, sequences, rhythms,
     tally_apps_lib, pitch_range_helpers, phrases)
 
 class DStarI(phrases.GridMask, phrases.StarPhraseBlock_I_Grid_A):
-    transpose_up = calliope.Transpose(interval=1)
-    pitches_from_grid_bubble = phrases.star_i_a_1
-    def set_children_from_class(self, *args, **kwargs):
-        super().set_children_from_class(*args, **kwargs)
-        for phrase_line in self:
-            # phrase_line.first_non_rest.tag(">")
-            phrase_line.respell = "sharps"
+    # TO DO... RE-ENABLE BELOW (ONLY DISABLED FOR TESTING PURPOSES WITH SELECTION)
+    pass
+    # transpose_up = calliope.Transpose(interval=1)
+    # pitches_from_grid_bubble = phrases.star_i_a_1
+    # def set_children_from_class(self, *args, **kwargs):
+    #     super().set_children_from_class(*args, **kwargs)
+    #     for phrase_line in self:
+    #         # phrase_line.first_non_rest.tag(">")
+    #         phrase_line.respell = "sharps"
 
 class DStarII(phrases.GridMask, phrases.StarPhraseBlock_II_Grid_A):
     transpose_up = calliope.Transpose(interval=1)
