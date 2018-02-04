@@ -11,5 +11,7 @@ c1 = MyCellBlock(
     name="c1",
     )
 
+# c1.illustrate_me()
+
 g = calliope.PitchGrid.from_bubble(c1)
 

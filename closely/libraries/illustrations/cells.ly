@@ -1,4 +1,4 @@
-% 2017-08-18 00:36
+% 2017-12-05 22:12
 
 \version "2.19.54"
 \language "english"
@@ -11,7 +11,9 @@
 
 \score {
     \new Score <<
-        \context Staff = "CloselyCell" {
+        \context Staff = "CloselyCell" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { CloselyCell }
             \set Staff.shortInstrumentName = \markup { CloselyCell }
             {
@@ -22,7 +24,9 @@
                 af'4
             }
         }
-        \context Staff = "CloselyCellTr2" {
+        \context Staff = "CloselyCellTr2" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { CloselyCellTr2 }
             \set Staff.shortInstrumentName = \markup { CloselyCellTr2 }
             {
@@ -33,7 +37,9 @@
                 bf'4
             }
         }
-        \context Staff = "CloselyCellDisplaced" {
+        \context Staff = "CloselyCellDisplaced" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { CloselyCellDisplaced }
             \set Staff.shortInstrumentName = \markup { CloselyCellDisplaced }
             {
@@ -44,7 +50,9 @@
                 af'4
             }
         }
-        \context Staff = "UpLick" {
+        \context Staff = "UpLick" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { UpLick }
             \set Staff.shortInstrumentName = \markup { UpLick }
             {
@@ -56,7 +64,9 @@
                 r4
             }
         }
-        \context Staff = "UpLickDisplaced" {
+        \context Staff = "UpLickDisplaced" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { UpLickDisplaced }
             \set Staff.shortInstrumentName = \markup { UpLickDisplaced }
             {
@@ -64,11 +74,13 @@
                 af'16
                 a'16 ] )
                 bf'2
-                r4
-                r16
+                r4 [
+                r16 ]
             }
         }
-        \context Staff = "CloselyStacked1" {
+        \context Staff = "CloselyStacked1" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { CloselyStacked1 }
             \set Staff.shortInstrumentName = \markup { CloselyStacked1 }
             {
@@ -78,7 +90,9 @@
                 r4.
             }
         }
-        \context Staff = "BiggerCell" {
+        \context Staff = "BiggerCell" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { BiggerCell }
             \set Staff.shortInstrumentName = \markup { BiggerCell }
             {

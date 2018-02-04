@@ -2,16 +2,16 @@
 	"folders":
 	[
 		{
-			"path": "../../mirrorecho/calliope"
+			"path": "/Users/randallwest/Code/mirrorecho/calliope"
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/sandbox"
 		},
 		{
 			"path": "."
 		},
 		{
 			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-copper"
-		},
-		{
-			"path": "/Users/randallwest/Code/mirrorecho/sandbox"
 		},
 		{
 			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-tokei"

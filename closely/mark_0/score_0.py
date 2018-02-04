@@ -107,7 +107,7 @@ class Cello(calliope.Line):
 
 # print(Cello().beats)
 
-# s = CloselyScore()
+# c.illustrate_me()
 # print(s[0].ly())
 
 calliope.illustrate_me(score_type=score_staves.CloselyScore, as_midi=True)

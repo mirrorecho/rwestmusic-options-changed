@@ -1,4 +1,4 @@
-% 2017-08-10 21:59
+% 2017-12-05 22:17
 
 \version "2.19.54"
 \language "english"
@@ -11,47 +11,52 @@
 
 \score {
     \new Score <<
-        \context Staff = "Event1" {
+        \context Staff = "Event1" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Event1 }
             \set Staff.shortInstrumentName = \markup { Event1 }
             {
-                \accidentalStyle modern-cautionary
                 d'4
                 r2.
             }
         }
-        \context Staff = "Event2" {
+        \context Staff = "Event2" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Event2 }
             \set Staff.shortInstrumentName = \markup { Event2 }
             {
-                \accidentalStyle modern-cautionary
-                f'8
-                r2..
+                f'8 [
+                r2.. ]
             }
         }
-        \context Staff = "Event3" {
+        \context Staff = "Event3" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Event3 }
             \set Staff.shortInstrumentName = \markup { Event3 }
             {
-                \accidentalStyle modern-cautionary
-                e'8
-                r2..
+                e'8 [
+                r2.. ]
             }
         }
-        \context Staff = "Event4" {
+        \context Staff = "Event4" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Event4 }
             \set Staff.shortInstrumentName = \markup { Event4 }
             {
-                \accidentalStyle modern-cautionary
                 g'4
                 r2.
             }
         }
-        \context Staff = "Event5" {
+        \context Staff = "Event5" \with {
+            \consists Horizontal_bracket_engraver
+        } {
             \set Staff.instrumentName = \markup { Event5 }
             \set Staff.shortInstrumentName = \markup { Event5 }
             {
-                \accidentalStyle modern-cautionary
                 af'4
                 r2.
             }

@@ -1,5 +1,5 @@
 import abjad
-from calliope import tools, bubbles, machines
+import calliope
 
 class ClusterNode(calliope.Bubble):
     leaf_string="c'4"

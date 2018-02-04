@@ -124,8 +124,8 @@ c_x = c_ix(name="c_x")
 
 c_sequence = (c_i, c_ii, c_iii, c_iv, c_v, c_vi, c_vii, c_viii, c_ix, c_x)
 
-# c_i.transform_through_pitch_grid.grid.illustrate_start()
-# c_i.transform_through_pitch_grid.grid.illustrate_me()
-# c_vi.illustrate_me()
+c_i.transform_through_pitch_grid.grid.illustrate_start()
+c_i.transform_through_pitch_grid.grid.illustrate_me()
+c_vi.illustrate_me()
 
 
