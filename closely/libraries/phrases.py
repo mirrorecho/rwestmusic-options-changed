@@ -6,6 +6,9 @@ from closely.libraries import (pitches, sequences, rhythms,
 
 # TO DO... CONSIDER MOVING TO CALLIOPE
 class GridMask(object):
+    """
+    TO DO: what is the meaning/use of this?
+    """
     pitches_from_grid_bubble = None
 
     class PitchesThroughGrid(calliope.Transform): pass
@@ -103,13 +106,20 @@ class StarPhraseBlock_I_Grid_A(StarPhraseBlockI, StarGridMixin): pass
 class StarPhraseBlock_II_Grid_A(StarPhraseBlockII, StarGridMixin): pass
 class StarPhraseBlock_III_Grid_A(StarPhraseBlockIII, StarGridMixin): pass
 
-# TO DO: figure out versioning
 star_i_a_1 = StarPhraseBlock_I_Grid_A(name="star_i_a")
+star_i_a_2 = StarPhraseBlock_I_Grid_A(name="star_i_a", grid_version=2)
 star_ii_a_1 = StarPhraseBlock_II_Grid_A(name="star_ii_a")
 star_iii_a_1 = StarPhraseBlock_III_Grid_A(name="star_iii_a")
 
 # ============================================================
 
-# print(star_i_a_1[0].pitches)
+# s2=calliope.Cell(*star_i_a_1.apply_selection(funny_selection).copy())
 
-calliope.illustrate_me(bubble=star_iii_a_1)
+# TO DO... why doesn't this work???
+# s2["show_cells"] = calliope.BracketCells()
+
+# star_i_a_1.illustrate_me()
+# s2.illustrate_me()
+
+
+# calliope.illustrate_me(bubble=star_i_a_1)
