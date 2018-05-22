@@ -4,16 +4,32 @@ import calliope
 from closely.libraries import (pitches, sequences, rhythms, 
     tally_apps_lib, pitch_range_helpers)
 
+pitches.SeePhrase(
+    pitches.PITCH_SEQUENCE_STAR, 
+    chords= pitches.CHORDS_SEQUENCE_STAR,
+    respell = "flats"
+    ).illustrate_me()
 
-class StarRhythmPhrase(sequences.PhraseFactory):
-    rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
-    rhythm_lengths = (10,8)
-    fill_rests=True
-    pitch_sequence = sequences.PitchSequence(0,0)
+# print(pitches.PITCH_SEQUENCE_STAR.cyclic_length)
+# p = [pitches.PITCH_SEQUENCE[i] for i in range(16)]
+# print(p)
+# print(pitches.PITCH_SEQUENCE_STAR[1])
 
-StarRhythmPhrase().illustrate_me()
+# print(p)
 
 
+
+# print(lcm(6,5) )
+
+
+
+# class StarRhythmPhrase(sequences.PhraseFactory):
+#     rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
+#     rhythm_lengths = (10,8)
+#     fill_rests=True
+#     pitch_sequence = sequences.PitchSequence(0,0)
+
+# StarRhythmPhrase().illustrate_me()
 
 
 

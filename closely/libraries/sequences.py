@@ -2,7 +2,7 @@ import math
 import abjad
 import calliope
 
-from closely.libraries import rhythms, pitches, sequences
+from closely.libraries import rhythms, sequences
 
 # TO DO: this is really useful! ... move to calliope!!!!
 class PitchSequence(calliope.CalliopeBaseMixin):
@@ -11,14 +11,47 @@ class PitchSequence(calliope.CalliopeBaseMixin):
     keep_in_range = None # set to tupe with start pitch, stop pitch
     transpose = 0 
     base_sequence = None
-    base_selections = (0,1,)
+    base_selections = (0,1) # e.g. (0,1) would be same
+    
+
+    @property
+    def cyclic_length(self):
+        """returns the length after which sequence repeats (usu. on new start pitch)
+        ...which is the least common multiple of the lengths of all the intervals and base selections up the chain"""
+        from functools import reduce
+
+        def get_lengths(my_sequence=None, lengths=()):
+            my_lengths = lengths or []
+            my_sequence = my_sequence or self
+            if my_sequence.base_sequence:
+                my_lengths.append(len(my_sequence.base_selections) - 1)
+            if my_sequence.intervals:
+                my_lengths.append(len(my_sequence.intervals) - 1)
+            if my_sequence.base_sequence:
+                return get_lengths(my_sequence.base_sequence, my_lengths)
+            else:
+                return my_lengths
+
+        lengths = get_lengths(self)
+
+        def my_gcd(*numbers):
+            """return the greatest common divisor of the given integers"""
+            from fractions import gcd
+            return reduce(gcd, numbers)
+
+        def lcm(a, b):
+            """returns the lowest common multiple."""    
+            return (a * b) // my_gcd(a, b)
+
+        return reduce(lcm, lengths, 1)
+
 
 
     def cyclic_at(self, attr_name, index):
         my_tuple = getattr(self, attr_name)
         loop_length = len(my_tuple) - 1
         base_item = my_tuple[index % loop_length]
-        return base_item + (my_tuple[-1] - my_tuple[0]) * math.floor(index / loop_length) 
+        return base_item + (my_tuple[-1] - my_tuple[0]) * (index // loop_length)
 
     def pitch_at(self, index):
         pitch = self.transpose
@@ -69,44 +102,44 @@ PITCH_SELECTIONS_G = (0,1,3,4,2,5)
 
 # TO DO !!!!!!!!!!!!!!!!!!!!!!!!! 
 # THIS SHOULD BE DEPRECIATED IN FAVOR OF PhraseFactory BELOW!!!!!!!!!!!!!!!
-class PhraseMaker(calliope.CalliopeBaseMixin):
-    pitch_sequence = PitchSequence()
-    rhythm_pattern = rhythms.SymmetricalRhythmPattern()
+# class PhraseMaker(calliope.CalliopeBaseMixin):
+#     pitch_sequence = PitchSequence()
+#     rhythm_pattern = rhythms.SymmetricalRhythmPattern()
 
-    def __init__(self, *args, **kwargs):
-        self.setup(**kwargs)
+#     def __init__(self, *args, **kwargs):
+#         self.setup(**kwargs)
 
-    def get_phrase_cells(self, 
-            rhythm_lengths = (1,), 
-            pitch_sequence = None,
-            pitch_sequence_index=0, 
-            pitch_selections = None,
-            keep_in_range = None,
-            transpose=0,
-            fill_rests=False, 
-            ):
-        self.warn("PhraseMaker SHOULD BE DEPRECIATED")
-        cells = []
-        pitch_sequence = pitch_sequence or self.pitch_sequence
-        if pitch_selections:
-            pitch_sequence = pitch_sequence.select(*pitch_selections, keep_in_range=keep_in_range, transpose=transpose)
-        elif keep_in_range or transpose: 
-            pitch_sequence = pitch_sequence(keep_in_range=keep_in_range, transpose=transpose)
+#     def get_phrase_cells(self, 
+#             rhythm_lengths = (1,), 
+#             pitch_sequence = None,
+#             pitch_sequence_index=0, 
+#             pitch_selections = None,
+#             keep_in_range = None,
+#             transpose=0,
+#             fill_rests=False, 
+#             ):
+#         self.warn("PhraseMaker SHOULD BE DEPRECIATED")
+#         cells = []
+#         pitch_sequence = pitch_sequence or self.pitch_sequence
+#         if pitch_selections:
+#             pitch_sequence = pitch_sequence.select(*pitch_selections, keep_in_range=keep_in_range, transpose=transpose)
+#         elif keep_in_range or transpose: 
+#             pitch_sequence = pitch_sequence(keep_in_range=keep_in_range, transpose=transpose)
         
-        for rl in rhythm_lengths:
-            rhythm = self.rhythm_pattern(rl, fill_rests=fill_rests)
-            pitches_length = len(list(filter(lambda x: x>0, rhythm)))
-            cells.append(calliope.Cell(
-                rhythm = rhythm,
-                pitches = pitch_sequence[pitch_sequence_index : pitch_sequence_index+pitches_length],
-                pitches_skip_rests = True
-            ))
-            pitch_sequence_index += pitches_length
-        return cells
+#         for rl in rhythm_lengths:
+#             rhythm = self.rhythm_pattern(rl, fill_rests=fill_rests)
+#             pitches_length = len(list(filter(lambda x: x>0, rhythm)))
+#             cells.append(calliope.Cell(
+#                 rhythm = rhythm,
+#                 pitches = pitch_sequence[pitch_sequence_index : pitch_sequence_index+pitches_length],
+#                 pitches_skip_rests = True
+#             ))
+#             pitch_sequence_index += pitches_length
+#         return cells
 
-    # TO DO: possibly rethink / refactor ... DRY
-    def __call__(self, **kwargs):
-        return calliope.Phrase(*self.get_phrase_cells(**kwargs), **kwargs)
+#     # TO DO: possibly rethink / refactor ... DRY
+#     def __call__(self, **kwargs):
+#         return calliope.Phrase(*self.get_phrase_cells(**kwargs), **kwargs)
 
 # EXAMPLE:
 # pm = PhraseMaker(

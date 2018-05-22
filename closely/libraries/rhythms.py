@@ -21,7 +21,7 @@ class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
     def __call__(self, length, fill_rests=False, *args, **kwargs):
         pattern = self.get_pattern(*args, **kwargs)
         filler = self.get_filler(*args, **kwargs)
-        start_length = math.floor(length/2) + self.end_offset
+        start_length = (length // 2) + self.end_offset
         end_length = length - start_length
         start = pattern[:start_length]
         end = pattern[self.end_offset : end_length + self.end_offset][::-1]
@@ -69,6 +69,11 @@ SLOW_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (4,), ),
     )
 
+GLOBE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (0.5,), (1,), (1.5,) ),
+    filler=( (2,), ),
+    )
+
 FLUTTER_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.25,0.25), (-0.5,), (0.25,0.25), ),
     filler=( (-0.5,), ),
@@ -94,10 +99,26 @@ UPBEAT_CLOCK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (-0.5, 0.5,), ),
     )
 
+UPBEAT_BOOK_RHYTHM_PATTERN = SymmetricalRhythmPattern(
+    pattern=( (-0.5,0.5), (-0.5,0.5), ),
+    filler=( (1,), ),
+    )
+
 FAST_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (-0.5, 0.5,), ),
     filler=( (0.5, 0.5,), ),
     )
+
+
+
+# class RhythmScore(calliope.Score):
+#     stylesheets=("../../stylesheets/score.ily",)
+
+#     class STRAIGHT_RHYTHM_PATTERN(calliope.RhythmicStaff):
+#         pass
+
+# calliope.illustrate_me(bubble=RhythmScore)
+
 
 # print(UPBEAT_CLOCK_RHYTHM_PATTERN(6))
 # print(UPBEAT_CLOCK_RHYTHM_PATTERN(6, fill_rests=True))
