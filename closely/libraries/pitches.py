@@ -1,7 +1,4 @@
 import calliope
-from closely.libraries import sequences, rhythms
-
-# _______________________________________________________________________________
 
 PITCH_CELL = (0, 2, 3, 5)
 
@@ -25,7 +22,7 @@ PITCH_SELECT_STAR = (0, 1, 3, 4, 2, 5)
 
 # _______________________________________________________________________________
 
-PITCH_SEQUENCE = sequences.PitchSequence(*PITCH_CELL)
+PITCH_SEQUENCE = calliope.PitchSequence(*PITCH_CELL)
 PITCH_SEQUENCE_DOWN = PITCH_SEQUENCE.select(*down())
 PITCH_SEQUENCE_SKIP = PITCH_SEQUENCE.select(*PITCH_SELECT_SKIP)
 PITCH_SEQUENCE_CAUTIOUS = PITCH_SEQUENCE.select(*PITCH_SELECT_CAUTIOUS)
@@ -69,17 +66,5 @@ CHORDS_SEQUENCE_II = CHORDS_ALT_MAJOR * 2 + CHORDS_FOURTHS
 
 CHORDS_SEQUENCE_STAR = CHORDS_SEQUENCE_I * 2 + CHORDS_SEQUENCE_II
 
-class SeePhrase(sequences.PhraseFactory):
-    rhythm_pattern = rhythms.STRAIGHT_RHYTHM_PATTERN
 
-    def __init__(self, pitch_sequence, chords=None, *args, **kwargs):
-        self.rhythm_lengths = (0, pitch_sequence.cyclic_length)
-        if chords:
-            chords_sequence = []
-            for p in range(pitch_sequence.cyclic_length):
-                chords_sequence.append([c + pitch_sequence[p] for c in chords[p % len(chords)]])
-            self.pitch_sequence = chords_sequence
-        else:
-            self.pitch_sequence = pitch_sequence
-        super().__init__(*args, **kwargs)
 

@@ -9,30 +9,41 @@ from closely.libraries import (pitches, sequences, rhythms,
 # -----------------------------------------------------------------
 # PHRASES:
 
-class Phrase0PitchesMixin(object):
-    pitch_sequence = pitches.PITCH_SEQUENCE_WILD
-    transpose = -3
+# class Phrase0PitchesMixin(object):
+#     pitch_sequence = pitches.PITCH_SEQUENCE_WILD
+#     transpose = -3
+
+c = calliope.Cell()
+c.rhythm = [1,1,2]
+c.pitches = [2,3,5]
+
+p = calliope.Phrase(c(),c(),c())
+p.cells[0,-1].events[0:4].tag(".",">")
 
 class SlowRhythm(sequences.DronePhraseFactory):
     rhythm_pattern = rhythms.SLOW_RHYTHM_PATTERN
+    rhythm_lengths = (7,7,6,6)
 
-class FasterRhythm(sequences.DronePhraseFactory):
-    rhythm_pattern = rhythms.SIMPLE_BROKEN_RHYTHM_PATTERN
+    def after_machine(self):
+        pass
 
-class SlowPhrase0(Phrase0PitchesMixin, SlowRhythm): pass
 
-class FastPhrase0(Phrase0PitchesMixin, FasterRhythm): pass
 
-class Phrase0_I(SlowPhrase0):
-    rhythm_lengths = (6,3,3,3)
-    bookend_rests = (8,4)
+# class FasterRhythm(sequences.DronePhraseFactory):
+#     rhythm_pattern = rhythms.SIMPLE_BROKEN_RHYTHM_PATTERN
 
-class Phrase0_II(FastPhrase0):
-    rhythm_lengths = (6,4,4,2,4,2,4,4,2)
-    bookend_rests = (12,)
-    pitch_sequence = pitches.PITCH_SEQUENCE_WILD.select(-3, -1).select(0,1,2,1)
+# class SlowPhrase0(Phrase0PitchesMixin, SlowRhythm): pass
 
-    
+# class FastPhrase0(Phrase0PitchesMixin, FasterRhythm): pass
+
+# class Phrase0_I(SlowPhrase0):
+#     rhythm_lengths = (6,3,3,3)
+#     bookend_rests = (8,4)
+
+# class Phrase0_II(FastPhrase0):
+#     rhythm_lengths = (6,4,4,2,4,2,4,4,2)
+#     bookend_rests = (12,)
+#     pitch_sequence = pitches.PITCH_SEQUENCE_WILD.select(-3, -1).select(0,1,2,1)
 
 
 

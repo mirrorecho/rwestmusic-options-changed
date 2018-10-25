@@ -2,19 +2,22 @@
 	"folders":
 	[
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/calliope"
+			"path": "/Users/rwest/Code/mirrorecho/calliope"
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/sandbox"
+			"path": "/Users/rwest/Code/mirrorecho/sandbox"
 		},
 		{
 			"path": "."
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-copper"
+			"path": "/Users/rwest/Code/mirrorecho/rwestmusic-copper"
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-tokei"
+			"path": "/Users/rwest/Code/mirrorecho/rwestmusic-tokei"
+		},
+		{
+			"path": "/Users/rwest/Code/venvs/calliope-3.0-3.0/lib/python3.7/site-packages/abjad"
 		}
 	],
 	"virtualenv": "/Users/rwest/Code/venvs/rwestmusic-options-changed"

@@ -2,7 +2,7 @@ import math
 import abjad
 import calliope
 
-class SymmetricalRhythmPattern(calliope.CalliopeBaseMixin):
+class SymmetricalRhythmPattern(calliope.BaseMixin):
     end_offset = 0
     pattern = ()
     filler = ( (1,), )
@@ -74,11 +74,13 @@ GLOBE_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     filler=( (2,), ),
     )
 
+# TO DO: change?
 FLUTTER_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.25,0.25), (-0.5,), (0.25,0.25), ),
     filler=( (-0.5,), ),
     )
 
+# TO DO: remove?
 BUILD_RHYTHM_PATTERN = SymmetricalRhythmPattern(
     pattern=( (0.5,0.5,), (0.5,0.5,),  ),
     filler=( (1,), ),

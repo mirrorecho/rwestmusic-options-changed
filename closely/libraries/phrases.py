@@ -1,7 +1,7 @@
 import abjad
 import calliope
-from closely.libraries import (pitches, sequences, rhythms, 
-    tally_apps_lib, pitch_range_helpers)
+
+import pitches, sequences, rhythms, tally_apps_lib, pitch_range_helpers
 
 
 # # TO DO... CONSIDER MOVING TO CALLIOPE
@@ -25,8 +25,53 @@ from closely.libraries import (pitches, sequences, rhythms,
 
 # # _______________________________________________________________________________
 
-class StarPhrase(sequences.PhraseFactory):
-    pitch_sequence = pitches.PITCH_SEQUENCE_STAR
+class StarPhrase(sequences.SequenceFactory, calliope.Phrase):
+    pitch_sequence = pitches.PITCH_SEQUENCE_STAR(transpose=-12)
+    rhythm_pattern = rhythms.STRAIGHT_RHYTHM_PATTERN
+    rhythm_lengths = (5,5,5,)
+    respell = "flats"
+
+class StarPhraseBlock(calliope.StackPitches, calliope.PhraseBlock):
+    intervals = ( (0,5), )
+
+    def get_branch(*args, **kwargs):
+        return StarPhrase()
+
+# s = StarPhraseBlock()
+s = calliope.CellBlock(
+    calliope.Cell(rhythm=(1,1,1,1,3,2), 
+    pitches=(2,0,None,7,None,6)),
+    calliope.Cell(rhythm=(1,1,1,1,3,2), 
+    pitches=(-2,0,None,7,None,6)),
+    )
+
+# calliope.SlurCells().transform(s)
+
+# s[0].cells[0].tag("bass")
+# s[0].cells[2].tag("treble")
+
+# s.illustrate_me()
+
+p = calliope.PhraseBlock(
+    calliope.Phrase("yo1", pitches=(0,12), rhythm=(1,2)),
+    calliope.Phrase("yo2", pitches=(2,7), rhythm=(2,1)),
+    )
+
+print(s.ly())
+print(s.is_simultaneous)
+s.illustrate_me()
+# p.illustrate_me()
+# print(s.is_simultaneous)
+# print(s.container_type)
+
+# m = p.blow()
+# print(m.is_simultaneous)
+# print(format(m))
+
+# calliope.illustrate_me(bubble=s)
+
+
+
 
 # class StarPhraseI(StarPhrase):
 #     rhythm_pattern = rhythms.UPBEAT_SPACED_RHYTHM_PATTERN
