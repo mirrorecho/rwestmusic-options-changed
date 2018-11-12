@@ -2,7 +2,7 @@ import abjad
 import calliope
 
 import pitches, sequences, rhythms, tally_apps_lib, pitch_range_helpers
-
+from closely.scores import score_staves
 
 # # TO DO... CONSIDER MOVING TO CALLIOPE
 # class GridMask(object):
@@ -27,23 +27,55 @@ import pitches, sequences, rhythms, tally_apps_lib, pitch_range_helpers
 
 class StarPhrase(sequences.SequenceFactory, calliope.Phrase):
     pitch_sequence = pitches.PITCH_SEQUENCE_STAR(transpose=-12)
-    rhythm_pattern = rhythms.STRAIGHT_RHYTHM_PATTERN
-    rhythm_lengths = (5,5,5,)
+    rhythm_pattern = rhythms.SIMPLE_RHYTHM_PATTERN
+    rhythm_lengths = (3,3,3,)
     respell = "flats"
 
 class StarPhraseBlock(calliope.StackPitches, calliope.PhraseBlock):
-    intervals = ( (0,5), )
+    intervals = pitches.CHORDS_SEQUENCE_STAR
 
     def get_branch(*args, **kwargs):
         return StarPhrase()
 
-# s = StarPhraseBlock()
-s = calliope.CellBlock(
-    calliope.Cell(rhythm=(1,1,1,1,3,2), 
-    pitches=(2,0,None,7,None,6)),
-    calliope.Cell(rhythm=(1,1,1,1,3,2), 
-    pitches=(-2,0,None,7,None,6)),
-    )
+star_block_d = StarPhraseBlock()
+
+d_score = CloselySection(calliope.Arrange, "D")
+d_score["violin"].arrange()
+
+
+# print(s[0].events[4].ticks_before)
+# print(s[1].events[4].ticks_before)
+
+# print(s[0].cells)
+# l = calliope.Line(*s[0].cells[:-1])
+# s.illustrate_me()
+
+# class CloselyMark(calliope.LineBlock):
+#     class Violin1(calliope.Line): pass
+#     class Violin2(calliope.Line): pass
+#     class Viola(calliope.Line): pass
+#     class Cello(calliope.Line): pass
+
+# my_mark = CloselyMark("my_mark")
+# my_mark["Violin1"].extend(s[0])
+
+
+# s.select.setattrs(container_type=abjad.Staff)
+# s.select[-1].tag("bass")
+# s.select[-1].events[7].tag("treble")
+
+# my_mark.illustrate_me(score_type=score_staves.CloselyScore)
+
+# StarPhrase().phrases[0].illustrate_me()
+
+# s.illustrate_me()
+
+# s = calliope.CellBlock(
+#     calliope.Cell(rhythm=(1,1,1,1,3,2), 
+#     pitches=(2,0,None,7,None,6)),
+#     calliope.Cell(rhythm=(1,1,1,1,3,2), 
+#     pitches=(-2,0,None,7,None,6)),
+#     )
 
 # calliope.SlurCells().transform(s)
 
@@ -52,14 +84,14 @@ s = calliope.CellBlock(
 
 # s.illustrate_me()
 
-p = calliope.PhraseBlock(
-    calliope.Phrase("yo1", pitches=(0,12), rhythm=(1,2)),
-    calliope.Phrase("yo2", pitches=(2,7), rhythm=(2,1)),
-    )
+# p = calliope.PhraseBlock(
+#     calliope.Phrase("yo1", pitches=(0,12), rhythm=(1,2)),
+#     calliope.Phrase("yo2", pitches=(2,7), rhythm=(2,1)),
+#     )
 
-print(s.ly())
-print(s.is_simultaneous)
-s.illustrate_me()
+# print(s.ly())
+# print(s.is_simultaneous)
+# s.illustrate_me()
 # p.illustrate_me()
 # print(s.is_simultaneous)
 # print(s.container_type)
