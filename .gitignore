@@ -86,4 +86,4 @@ target/
 
 *.sublime-workspace
 
-*.sublime-workspace
+*.sublime-project
