@@ -85,8 +85,8 @@ pitches.SeePhrase(
 
 
 # print( 
-#     len( r["Line1"].non_rest_events ), 
-#     len( r["Line2"].non_rest_events ), 
+#     len( r["Line1"].note_events ), 
+#     len( r["Line2"].note_events ), 
 #     )
 
 # calliope.illustrate_me(bubble=r)

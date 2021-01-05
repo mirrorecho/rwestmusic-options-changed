@@ -14,7 +14,7 @@ def get_rhythm_phrases(phrase_name, lengths=(8,8)):
         rhythm_lengths=lengths
         )
     rhythm_phrases.metrical_durations = ((2,4),) * round(rhythm_phrases.beats / 2)
-    rhythm_phrases.non_rest_events[0].tag(phrase_name + " (%s) " % len(rhythm_phrases[0].non_rest_events) )
+    rhythm_phrases.note_events[0].tag(phrase_name + " (%s) " % len(rhythm_phrases[0].note_events) )
     return rhythm_phrases
 
 def see_patterns(patterns=(), lengths=()):

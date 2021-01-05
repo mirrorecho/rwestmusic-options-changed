@@ -6,6 +6,10 @@
 		},
 		{
 			"path": "."
+		},
+		{
+			"path": "/Users/rwest/Code/mirrorecho/sandbox"
 		}
-	]
+	],
+	"virtualenv": "/Users/rwest/Code/venvs/rwestmusic-options-changed"
 }

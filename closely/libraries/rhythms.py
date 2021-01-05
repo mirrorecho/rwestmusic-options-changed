@@ -2,14 +2,10 @@ import math
 import abjad
 import calliope
 
-class SymmetricalRhythmPattern(calliope.BaseMixin):
+class SymmetricalRhythmPattern(calliope.CalliopeBase):
     end_offset = 0
     pattern = ()
     filler = ( (1,), )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__()
-        self.setup(**kwargs)
 
     def get_pattern(self, *args, **kwargs):
         return self.pattern

@@ -29,7 +29,7 @@ class PhraseOsti(PhraseRhythm):
 class PhraseChopRhythm(calliope.Transform):
     line = 0
     def transform_nodes(self, machine):
-        for e in machine[self.line].non_rest_events:
+        for e in machine[self.line].note_events:
             my_tie = e.first_non_rest
             my_tie.ticks = int(my_tie.ticks / 2)
             e.append(my_tie())
@@ -47,7 +47,7 @@ class SwapPhraseLines(calliope.Transform):
 
 # TO DO: this might be better to use in calliope generally
 def split_events(machine, split_beats=0.5):
-    for e in machine.non_rest_events:
+    for e in machine.note_events:
         if e.beats > split_beats:
             event_index = e.my_index
             e.parent[event_index:event_index+1] = [
@@ -109,14 +109,14 @@ class FStarIII(phrases.StarPhraseBlockIII):
         class ExtendEnd(calliope.Transform):
             def transform_nodes(self, machine):
                 for phrase_line in machine:
-                    phrase_line.non_rest_events[-1].first_non_rest.beats = 3
+                    phrase_line.note_events[-1].first_non_rest.beats = 3
         class MiscOctaves(calliope.Transform):
             def transform_nodes(self, machine):
-                machine[2].non_rest_events[-1].pitch += 12
+                machine[2].note_events[-1].pitch += 12
         class MiscRespell(calliope.Transform):
             def transform_nodes(self, machine):
                 machine[3].respell = "sharps"
-                flute_events = machine[0].non_rest_events
+                flute_events = machine[0].note_events
                 flute_events[-1].respell = "sharps"
                 flute_events[-2].respell = "sharps"
 
@@ -133,7 +133,7 @@ class FStarIV(phrases.GridMask, phrases.StarPhraseBlock_I_Grid_A):
             interval = 12
         class MiscOctaves(calliope.Transform):
             def transform_nodes(self, machine):
-                machine[1].non_rest_events[0].pitch -= 12
+                machine[1].note_events[0].pitch -= 12
 
 class FStarV(phrases.GridMask, phrases.StarPhraseBlock_II_Grid_A):
     transpose_up = calliope.Transpose(interval=1)
@@ -157,7 +157,7 @@ class FStarVI(phrases.GridMask, phrases.StarPhraseBlock_III_Grid_A):
         class ExtendEnd(calliope.Transform):
             def transform_nodes(self, machine):
                 for phrase_line in machine:
-                    phrase_line.non_rest_events[-1].first_non_rest.beats = 3
+                    phrase_line.note_events[-1].first_non_rest.beats = 3
 class FStarVII(FStarIV):
     transpose_up = calliope.Transpose(interval=2)
     class TransformMe(FStarTransform): 

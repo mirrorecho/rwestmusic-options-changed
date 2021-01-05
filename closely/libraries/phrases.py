@@ -17,7 +17,7 @@ from closely.scores import score_staves
 #         def transform_nodes(self, machine):
 #             if machine.pitches_from_grid_bubble:
 #                 for line_index, l in enumerate(machine):
-#                     for event_index, event in enumerate([e for e in l.non_rest_events]):
+#                     for event_index, event in enumerate([e for e in l.note_events]):
 #                         # NOTE: grid will have numpy.int64 for each pitch, but machine expects int
 #                         # ... change to use duck typing?
 #                         event.pitch = int(machine.pitches_from_grid_bubble.pitch_grid.data.iat[line_index, event_index])
@@ -31,7 +31,7 @@ class StarPhrase(sequences.SequenceFactory, calliope.Phrase):
     rhythm_lengths = (3,3,3,)
     respell = "flats"
 
-class StarPhraseBlock(calliope.StackPitches, calliope.PhraseBlock):
+class StarPhraseBlock(calliope.StackPitches, calliope.PhraseBlzock):
     intervals = pitches.CHORDS_SEQUENCE_STAR
 
     def get_branch(*args, **kwargs):
@@ -39,8 +39,9 @@ class StarPhraseBlock(calliope.StackPitches, calliope.PhraseBlock):
 
 star_block_d = StarPhraseBlock()
 
-d_score = CloselySection(calliope.Arrange, "D")
-d_score["violin"].arrange()
+# d_score = CloselySection(calliope.Arrange, "D")
+# d_score["violin"].arrange()
+star_block_d.illustrate_me()
 
 
 # print(s[0].events[4].ticks_before)
@@ -62,7 +63,7 @@ d_score["violin"].arrange()
 
 # s.select.setattrs(container_type=abjad.Staff)
 # s.select[-1].tag("bass")
-# s.select[-1].events[7].tag("treble")
+# s.select[-1].events[7].ta("treble")7
 
 # my_mark.illustrate_me(score_type=score_staves.CloselyScore)
 
